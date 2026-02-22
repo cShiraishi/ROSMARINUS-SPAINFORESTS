@@ -217,21 +217,20 @@ st.sidebar.markdown("### 📊 Status")
 # --- APP ACCESS TRACKER (Professional Analytics) ---
 if 'visited' not in st.session_state:
     try:
-        # Using a more robust, session-aware hit counter for scientific repos
-        # This only increments once per browser session
-        counter_url = "https://hits.se/rosmarinus-spainforests-analytics/hits"
-        res = requests.get(counter_url, timeout=5)
+        # Use Hits.dwyl.com (Industry standard for scientific/open-source projects)
+        # This creates a stable, visually clean badge
+        counter_url = "https://hits.dwyl.com/cShiraishi/rosmarinus-spainforests.svg"
+        requests.get(counter_url, timeout=5)
         st.session_state.visited = True
     except:
         pass
 
 st.sidebar.markdown("### 📈 Analytics")
-# Show a professional "Live Statistics" badge
-st.sidebar.markdown(
-    f'<a href="https://hits.se/rosmarinus-spainforests-analytics/"><img src="https://hits.se/rosmarinus-spainforests-analytics/hits.svg?style=flat-square&color=007bff&label=Scientific%20Accesses" alt="Hits"></a>',
-    unsafe_allow_html=True
+# Stable badge rendering via Streamlit's native image component
+st.sidebar.image(
+    "https://hits.dwyl.com/cShiraishi/rosmarinus-spainforests.svg",
+    caption="Scientific citation & access telemetry"
 )
-st.sidebar.caption("Global repository telemetry for academic citation monitoring.")
 
 # --- TOP KPI ROW ---
 col1, col2, col3, col4 = st.columns(4)
