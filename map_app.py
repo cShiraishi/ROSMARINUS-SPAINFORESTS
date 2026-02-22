@@ -211,26 +211,6 @@ st.sidebar.metric(label="Sampling Sites", value=f"{total_regions} Unique Sites")
 st.sidebar.metric(label="Extracted Compounds", value=f"{total_compounds} Molecules")
 st.sidebar.divider()
 
-st.sidebar.divider()
-st.sidebar.markdown("### 📊 Status")
-
-# --- APP ACCESS TRACKER (Professional Analytics) ---
-if 'visited' not in st.session_state:
-    try:
-        # Use Hits.dwyl.com (Industry standard for scientific/open-source projects)
-        # This creates a stable, visually clean badge
-        counter_url = "https://hits.dwyl.com/cShiraishi/rosmarinus-spainforests.svg"
-        requests.get(counter_url, timeout=5)
-        st.session_state.visited = True
-    except:
-        pass
-
-st.sidebar.markdown("### 📈 Analytics")
-# Stable badge rendering via Streamlit's native image component
-st.sidebar.image(
-    "https://hits.dwyl.com/cShiraishi/rosmarinus-spainforests.svg",
-    caption="Scientific citation & access telemetry"
-)
 
 # --- TOP KPI ROW ---
 col1, col2, col3, col4 = st.columns(4)
