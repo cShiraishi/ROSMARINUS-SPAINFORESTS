@@ -214,18 +214,24 @@ st.sidebar.divider()
 st.sidebar.divider()
 st.sidebar.markdown("### 📊 Status")
 
-# Connect to external API for live access counter
-try:
-    api_url = "https://api.counterapi.dev/v1/rosmarinus_spainforests/app_visits/up"
-    res = requests.get(api_url, timeout=3)
-    if res.status_code == 200:
-        visit_count = res.json().get('count', 'N/A')
-    else:
-        visit_count = "Unavailable"
-except Exception:
-    visit_count = "Unavailable"
-    
-st.sidebar.markdown(f"👁️ **Page Views:** {visit_count}")
+# --- APP ACCESS TRACKER (Professional Analytics) ---
+if 'visited' not in st.session_state:
+    try:
+        # Using a more robust, session-aware hit counter for scientific repos
+        # This only increments once per browser session
+        counter_url = "https://hits.se/rosmarinus-spainforests-analytics/hits"
+        res = requests.get(counter_url, timeout=5)
+        st.session_state.visited = True
+    except:
+        pass
+
+st.sidebar.markdown("### 📈 Analytics")
+# Show a professional "Live Statistics" badge
+st.sidebar.markdown(
+    f'<a href="https://hits.se/rosmarinus-spainforests-analytics/"><img src="https://hits.se/rosmarinus-spainforests-analytics/hits.svg?style=flat-square&color=007bff&label=Scientific%20Accesses" alt="Hits"></a>',
+    unsafe_allow_html=True
+)
+st.sidebar.caption("Global repository telemetry for academic citation monitoring.")
 
 # --- TOP KPI ROW ---
 col1, col2, col3, col4 = st.columns(4)
