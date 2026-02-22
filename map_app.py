@@ -237,10 +237,10 @@ with col4:
 st.write("---")
 
 # --- TABS FOR CLEAN LAYOUT ---
-tab0, tab1, tab2, tab3 = st.tabs([
-    "📊 Overall Analytics", 
+tab1, tab2, tab0, tab3 = st.tabs([
     "📍 Geographic & Climate Mapping", 
     "🧪 Chemical Profile (SMILES)", 
+    "📊 Overall Analytics", 
     "🗃️ Raw Data Repository"
 ])
 
