@@ -100,8 +100,12 @@ def load_and_process_data():
         
         if lat is not None and lon is not None:
             # L5 and L6 are the same City but different coordinates.
-            # We create a unique "Region/Sampling Point" label combining Location and City.
-            unique_region_id = f"{loc_ref} - {city}"
+            # We differentiate them for clarity in the map and legend.
+            display_city = city
+            if loc_ref == 'L5': display_city = f"{city} (A)"
+            if loc_ref == 'L6': display_city = f"{city} (B)"
+            
+            unique_region_id = f"{loc_ref} - {display_city}"
             processed_data.append({
                 'Name': name,
                 'Ref': loc_ref,
@@ -254,11 +258,11 @@ with tab0:
             # Chart 1: Chemical Diversity per Location
             loc_cols = ['L1', 'L2', 'L3', 'L4', 'L5', 'L6', 'L7', 'L8']
             diversity = (dist_data[loc_cols] > 0).sum().reset_index()
-            diversity.columns = ['Site', 'Compound Count']
+            diversity.columns = ['Site ID', 'Compound Count']
             
             fig_div = px.bar(
-                diversity, x='Site', y='Compound Count',
-                title="Chemical Diversity (Number of detected compounds per Site)",
+                diversity, x='Site ID', y='Compound Count',
+                title="Chemical Diversity (Detected compounds per Site Ref)",
                 color='Compound Count',
                 color_continuous_scale='Viridis',
                 text_auto=True
