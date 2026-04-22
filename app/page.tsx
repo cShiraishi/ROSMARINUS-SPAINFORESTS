@@ -181,16 +181,6 @@ export default function Home() {
         </div>
       </main>
 
-      <style jsx global>{`
-        .custom-scrollbar::-webkit-scrollbar { width: 5px; }
-        .custom-scrollbar::-webkit-scrollbar-track { background: white; }
-        .custom-scrollbar::-webkit-scrollbar-thumb { background: #E5E7EB; border-radius: 10px; }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #10b981; }
-        
-        .leaflet-container { 
-          background: #F9FAFB !important;
-        }
-      `}</style>
     </div>
   );
 }
