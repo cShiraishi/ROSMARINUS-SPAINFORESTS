@@ -1,5 +1,5 @@
 "use client";
-import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell } from "recharts";
+import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell, ReferenceLine } from "recharts";
 
 interface Distribution {
   Compound: string;
@@ -9,71 +9,61 @@ interface Distribution {
 export default function AnalyticsCharts({ distribution }: { distribution: Distribution[] }) {
   const loc_cols = ['L1', 'L2', 'L3', 'L4', 'L5', 'L6', 'L7', 'L8'];
   
-  // Calculate richness per site
   const richnessData = loc_cols.map(loc => ({
     site: loc,
     count: distribution.filter(d => (d as any)[loc] > 0).length
   }));
 
-  const COLORS = ['#2D5A27', '#346B2D', '#3B7C33', '#428D39', '#499F3F', '#50B045', '#57C14B', '#5ED251'];
-
   return (
-    <div className="space-y-12">
-      <div className="bg-white p-8 rounded-3xl border border-gray-100 shadow-sm">
-        <h3 className="text-xl font-bold text-forest mb-6">Chemical Richness per Sampling Site</h3>
-        <div className="h-[400px] w-full">
-          <ResponsiveContainer width="100%" height="100%">
-            <BarChart data={richnessData}>
-              <XAxis dataKey="site" axisLine={false} tickLine={false} />
-              <YAxis axisLine={false} tickLine={false} />
-              <Tooltip 
-                cursor={{fill: '#f0f4f0'}}
-                contentStyle={{ borderRadius: '12px', border: 'none', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}
-              />
-              <Bar dataKey="count" radius={[8, 8, 0, 0]}>
-                {richnessData.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                ))}
-              </Bar>
-            </BarChart>
-          </ResponsiveContainer>
-        </div>
+    <div className="h-full flex flex-col">
+      <div className="flex-1 min-h-[300px]">
+        <ResponsiveContainer width="100%" height="100%">
+          <BarChart data={richnessData} margin={{ top: 20, right: 30, left: 0, bottom: 0 }}>
+            <XAxis 
+              dataKey="site" 
+              axisLine={false} 
+              tickLine={false} 
+              tick={{ fill: '#34d399', fontSize: 10, fontWeight: 700 }}
+            />
+            <YAxis 
+              axisLine={false} 
+              tickLine={false} 
+              tick={{ fill: '#065f46', fontSize: 10 }}
+            />
+            <Tooltip 
+              cursor={{ fill: 'rgba(52, 211, 153, 0.05)' }}
+              contentStyle={{ 
+                backgroundColor: '#0F160F', 
+                border: '1px solid rgba(16, 185, 129, 0.2)', 
+                borderRadius: '12px',
+                fontSize: '12px',
+                color: '#fff'
+              }}
+              itemStyle={{ color: '#34d399' }}
+            />
+            <Bar dataKey="count" radius={[4, 4, 0, 0]} barSize={40}>
+              {richnessData.map((entry, index) => (
+                <Cell key={`cell-${index}`} fill={index % 2 === 0 ? '#10b981' : '#059669'} />
+              ))}
+            </Bar>
+          </BarChart>
+        </ResponsiveContainer>
       </div>
 
-      <div className="bg-white p-8 rounded-3xl border border-gray-100 shadow-sm overflow-x-auto">
-        <h3 className="text-xl font-bold text-forest mb-6">Compound Presence Heatmap</h3>
-        <table className="w-full text-xs">
-          <thead>
-            <tr>
-              <th className="text-left py-2 px-4 sticky left-0 bg-white">Compound</th>
-              {loc_cols.map(l => <th key={l} className="py-2 px-2 text-center">{l}</th>)}
-            </tr>
-          </thead>
-          <tbody>
-            {distribution.slice(0, 15).map((d) => (
-              <tr key={d.Compound} className="border-t border-gray-50 hover:bg-gray-50 transition-colors">
-                <td className="py-3 px-4 font-medium text-gray-700 sticky left-0 bg-white shadow-[2px_0_5px_rgba(0,0,0,0.02)]">{d.Compound}</td>
-                {loc_cols.map(l => {
-                  const val = (d as any)[l];
-                  const opacity = val > 0 ? Math.min(0.1 + (val / 10), 1) : 0;
-                  return (
-                    <td key={l} className="p-1">
-                      <div 
-                        className="h-8 rounded-md flex items-center justify-center text-[10px] font-bold"
-                        style={{ 
-                          backgroundColor: val > 0 ? `rgba(45, 90, 39, ${opacity})` : 'transparent',
-                          color: val > 1 ? 'white' : '#2D5A27'
-                        }}
-                      >
-                        {val > 0 ? val.toFixed(2) : '-'}
-                      </div>
-                    </td>
-                  );
-                })}
-              </tr>
-            ))}
-          </tbody>
-        </table>
+      <div className="mt-8 grid grid-cols-1 gap-2 overflow-y-auto max-h-[200px] custom-scrollbar pr-2 uppercase">
+        {distribution.slice(0, 50).map((d) => {
+          const presenceCount = loc_cols.filter(l => (d as any)[l] > 0).length;
+          return (
+            <div key={d.Compound} className="flex items-center justify-between py-1.5 px-3 bg-emerald-950/20 rounded-lg border border-emerald-900/10">
+              <span className="text-[10px] font-bold text-gray-400 truncate max-w-[200px]">{d.Compound}</span>
+              <div className="flex gap-1">
+                {loc_cols.map(l => (
+                   <div key={l} className={`w-1.5 h-1.5 rounded-full ${ (d as any)[l] > 0 ? 'bg-emerald-500' : 'bg-emerald-900/20'}`} title={l} />
+                ))}
+              </div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
