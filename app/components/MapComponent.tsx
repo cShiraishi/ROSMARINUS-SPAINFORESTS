@@ -4,7 +4,7 @@ import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { useEffect } from "react";
 
-// Fix for default Leaflet icons in Next.js
+// Fix for default Leaflet icons
 const customIcon = L.icon({
   iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
   iconRetinaUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
@@ -15,7 +15,6 @@ const customIcon = L.icon({
   shadowSize: [41, 41]
 });
 
-// Component to handle map view updates
 function MapUpdater({ locations }: { locations: any[] }) {
   const map = useMap();
   useEffect(() => {
@@ -41,8 +40,8 @@ export default function MapComponent({ locations, onSiteClick }: { locations: an
         scrollWheelZoom={false}
       >
         <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
-          url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
+          attribution='&copy; CARTO'
+          url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
         />
         <MapUpdater locations={locations} />
         {locations.map((loc) => (
@@ -54,30 +53,15 @@ export default function MapComponent({ locations, onSiteClick }: { locations: an
               click: () => onSiteClick?.(loc.ref),
             }}
           >
-            <Popup className="custom-popup">
-              <div className="p-2">
-                <p className="font-bold text-emerald-600 mb-1">{loc.ref}</p>
-                <p className="text-sm text-gray-800">{loc.city}</p>
-                <div className="mt-2 pt-2 border-t border-gray-100 text-[10px] text-gray-500">
-                  <p>Altitude: {loc.altitude}m</p>
-                  <p>Rainfall: {loc.rainfall}mm</p>
-                </div>
+            <Popup>
+              <div className="p-1">
+                <p className="font-bold text-emerald-600 leading-none mb-1">{loc.ref}</p>
+                <p className="text-xs text-gray-500">{loc.city}</p>
               </div>
             </Popup>
           </Marker>
         ))}
       </MapContainer>
-
-      <style jsx global>{`
-        .leaflet-popup-content-wrapper {
-          border-radius: 12px;
-          background: white;
-          color: #333;
-        }
-        .leaflet-popup-tip {
-          background: white;
-        }
-      `}</style>
     </div>
   );
 }

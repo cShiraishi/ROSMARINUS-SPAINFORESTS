@@ -1,13 +1,13 @@
 "use client";
 import { useState, useMemo } from "react";
 import dynamic from "next/dynamic";
-import { Search, Filter, Database, Beaker, Map as MapIcon, BarChart3, ChevronRight, X } from "lucide-react";
+import { Search, Filter, Database, Beaker, Map as MapIcon, BarChart3, ChevronRight, X, MapPin, Microscope } from "lucide-react";
 import data from "../public/data.json";
 
 // Dynamic imports
 const MapComponent = dynamic(() => import("./components/MapComponent"), {
   ssr: false,
-  loading: () => <div className="h-full w-full bg-gray-900/50 animate-pulse rounded-2xl" />,
+  loading: () => <div className="h-full w-full bg-gray-50 animate-pulse rounded-2xl" />,
 });
 
 const MoleculeCatalog = dynamic(() => import("./components/MoleculeCatalog"), { ssr: false });
@@ -38,120 +38,112 @@ export default function Home() {
   }, [selectedSite, searchQuery]);
 
   return (
-    <div className="flex h-screen bg-[#0A0F0A] text-gray-100 overflow-hidden font-sans selection:bg-emerald-500/30">
+    <div className="flex h-screen bg-[#FDFDFD] text-[#1A2F1A] overflow-hidden font-sans selection:bg-emerald-100">
       
-      {/* 🟢 LEFT WORKSTATION PANEL (Sidebar) */}
-      <aside className={`bg-[#0F160F] border-r border-emerald-900/20 transition-all duration-500 ease-in-out flex flex-col ${isSidebarOpen ? 'w-96' : 'w-20'}`}>
-        <div className="p-6 flex items-center justify-between border-b border-emerald-900/10">
-          {isSidebarOpen && (
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-emerald-500 rounded-lg flex items-center justify-center font-black text-black">R</div>
-              <div>
-                <h1 className="font-black text-emerald-500 leading-none tracking-tighter">ROSMARINUS</h1>
-                <p className="text-[10px] text-emerald-700 font-bold uppercase tracking-widest">Repository v2.5</p>
-              </div>
-            </div>
+      {/* ⚪️ CLEAN SIDEBAR */}
+      <aside className={`bg-[#F7F9F7] border-r border-gray-200 transition-all duration-500 ease-in-out flex flex-col ${isSidebarOpen ? 'w-80' : 'w-20'}`}>
+        <div className="p-6 border-b border-gray-100">
+          {isSidebarOpen ? (
+            <img src="/ROSMARINUS-SPAINFORESTS/logo.png" alt="Logo" className="w-full object-contain" />
+          ) : (
+            <div className="w-10 h-10 bg-emerald-600 rounded-lg flex items-center justify-center font-black text-white mx-auto">R</div>
           )}
-          <button onClick={() => setSidebarOpen(!isSidebarOpen)} className="p-2 hover:bg-emerald-500/10 rounded-lg text-emerald-500">
-            {isSidebarOpen ? <X size={20} /> : <Filter size={20} />}
-          </button>
         </div>
 
         {isSidebarOpen && (
           <div className="flex-1 overflow-y-auto p-6 space-y-8 custom-scrollbar">
-            {/* Global Search */}
+            {/* Search */}
             <div className="space-y-2">
-              <label className="text-[10px] font-bold text-emerald-700 uppercase tracking-widest px-1">Global Query</label>
               <div className="relative">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-emerald-800 w-4 h-4" />
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-4 h-4" />
                 <input 
                   type="text" 
-                  placeholder="Compound name..."
-                  className="w-full bg-emerald-900/5 border border-emerald-900/20 rounded-xl py-3 pl-10 pr-4 text-sm focus:ring-1 focus:ring-emerald-500 outline-none transition-all"
+                  placeholder="Refine search..."
+                  className="w-full bg-white border border-gray-200 rounded-xl py-2.5 pl-10 pr-4 text-sm focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none transition-all placeholder:text-gray-300"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                 />
               </div>
             </div>
 
-            {/* Metrics Grid */}
-            <div className="grid grid-cols-2 gap-3">
-              <div className="bg-emerald-900/5 border border-emerald-900/10 p-4 rounded-xl">
-                <p className="text-[9px] font-bold text-emerald-700 uppercase mb-1">Molecules</p>
-                <p className="text-2xl font-black text-gray-200">{filteredData.distribution.length}</p>
-              </div>
-              <div className="bg-emerald-900/5 border border-emerald-900/10 p-4 rounded-xl">
-                <p className="text-[9px] font-bold text-emerald-700 uppercase mb-1">Sites</p>
-                <p className="text-2xl font-black text-gray-200">{filteredData.locations.length}</p>
+            {/* Quick Metrics */}
+            <div className="grid grid-cols-1 gap-3">
+              <div className="bg-white border border-gray-100 p-4 rounded-xl shadow-sm">
+                <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Active Samples</p>
+                <div className="flex items-baseline gap-2">
+                  <p className="text-2xl font-black text-[#2D5A27]">{filteredData.distribution.length}</p>
+                  <span className="text-[10px] text-emerald-600 font-bold">Molecules</span>
+                </div>
               </div>
             </div>
 
-            {/* Site Selector List */}
-            <div className="space-y-2">
-              <label className="text-[10px] font-bold text-emerald-700 uppercase tracking-widest px-1">Selected Location</label>
+            {/* Location Navigation */}
+            <div className="space-y-3">
+              <p className="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] px-1">Locations</p>
               <div className="space-y-1">
                 <button 
                   onClick={() => setSelectedSite(null)}
-                  className={`w-full text-left px-4 py-3 rounded-xl text-sm transition-all flex items-center justify-between group ${!selectedSite ? 'bg-emerald-500 text-black font-bold' : 'hover:bg-emerald-500/5 text-gray-400'}`}
+                  className={`w-full text-left px-4 py-2.5 rounded-lg text-sm transition-all flex items-center gap-3 ${!selectedSite ? 'bg-emerald-600 text-white font-bold shadow-lg shadow-emerald-600/20' : 'hover:bg-emerald-50/80 text-gray-500'}`}
                 >
-                  Show All Forests
-                  <ChevronRight size={14} className={!selectedSite ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'} />
+                  <Database size={16} />
+                  Complete Archive
                 </button>
                 {data.locations.map((loc) => (
                   <button 
                     key={loc.ref}
                     onClick={() => setSelectedSite(loc.ref)}
-                    className={`w-full text-left px-4 py-3 rounded-xl text-sm transition-all flex items-center justify-between group ${selectedSite === loc.ref ? 'bg-emerald-500 text-black font-bold' : 'hover:bg-emerald-500/5 text-gray-400'}`}
+                    className={`w-full text-left px-4 py-2.5 rounded-lg text-sm transition-all flex items-center justify-between group ${selectedSite === loc.ref ? 'bg-emerald-50 text-emerald-700 font-bold border border-emerald-100' : 'hover:bg-emerald-50/50 text-gray-500'}`}
                   >
-                    <span>{loc.ref} <span className="opacity-40 ml-2">— {loc.city}</span></span>
-                    <ChevronRight size={14} className={selectedSite === loc.ref ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'} />
+                    <span className="flex items-center gap-3">
+                      <div className={`w-1.5 h-1.5 rounded-full ${selectedSite === loc.ref ? 'bg-emerald-500' : 'bg-gray-300 group-hover:bg-emerald-300'}`} />
+                      {loc.ref}
+                    </span>
+                    <ChevronRight size={14} className={selectedSite === loc.ref ? 'opacity-100' : 'opacity-0 group-hover:opacity-40'} />
                   </button>
                 ))}
               </div>
             </div>
           </div>
         )}
+        
+        <div className="p-6 border-t border-gray-100">
+           <button onClick={() => setSidebarOpen(!isSidebarOpen)} className="w-full flex items-center justify-center p-2 hover:bg-gray-100 rounded-lg text-gray-400 transition-colors">
+            <Filter size={18} />
+          </button>
+        </div>
       </aside>
 
-      {/* 🟢 MAIN DISCOVERY AREA */}
-      <main className="flex-1 flex flex-col h-full bg-[#0A0F0A]">
+      {/* 🟢 CLEAN WORKSPACE */}
+      <main className="flex-1 flex flex-col h-full bg-white relative">
         
-        {/* Top Header */}
-        <header className="h-20 border-b border-emerald-900/10 flex items-center justify-between px-8 bg-[#0F160F]/50 backdrop-blur-xl shrink-0">
-          <div className="flex items-center gap-8">
-            <div className="flex items-center gap-2 text-emerald-500">
-              <Database size={18} />
-              <span className="text-sm font-bold tracking-tight">DATA EXPLORER</span>
-            </div>
-            <div className="h-4 w-[1px] bg-emerald-900/30" />
-            <div className="flex gap-4 text-xs font-medium text-gray-500">
-              <span className="flex items-center gap-1"><MapPin size={12} className="text-emerald-700" /> Spain</span>
-              <span className="flex items-center gap-1"><Beaker size={12} className="text-emerald-700" /> S. Rosmarinus</span>
-            </div>
-          </div>
+        {/* Header */}
+        <header className="h-16 border-b border-gray-100 flex items-center justify-between px-8 shrink-0 bg-white/80 backdrop-blur-md sticky top-0 z-10">
           <div className="flex items-center gap-4">
-             {selectedSite && (
-               <div className="flex items-center bg-emerald-500/10 border border-emerald-500/20 px-3 py-1.5 rounded-lg">
-                 <span className="text-xs font-bold text-emerald-500">Filtering by {selectedSite}</span>
-                 <button onClick={() => setSelectedSite(null)} className="ml-2 hover:text-white"><X size={14} /></button>
-               </div>
-             )}
+            <h2 className="text-sm font-bold text-gray-400 flex items-center gap-2">
+               ITERATIVE REPOSITORY <span className="text-gray-200">/</span> 
+               <span className="text-emerald-600 uppercase tracking-tighter">{selectedSite || 'Global View'}</span>
+            </h2>
+          </div>
+          <div className="flex gap-4">
+            <div className="flex items-center gap-2 text-[10px] font-bold text-gray-300">
+              <MapPin size={12} /> IBERIAN PENINSULA
+            </div>
           </div>
         </header>
 
-        {/* Discovery Grid */}
-        <div className="flex-1 overflow-y-auto p-8 lg:p-12 custom-scrollbar">
-          <div className="max-w-[1600px] mx-auto space-y-12">
+        {/* content */}
+        <div className="flex-1 overflow-y-auto p-8 custom-scrollbar">
+          <div className="max-w-[1400px] mx-auto space-y-12">
             
-            {/* Visual Cluster (Map & Charts) */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 h-[600px]">
-              <div className="bg-[#0F160F] border border-emerald-900/10 rounded-2xl overflow-hidden shadow-2xl group flex flex-col">
-                <div className="p-4 border-b border-emerald-900/10 flex items-center justify-between">
-                  <span className="text-[10px] font-black uppercase tracking-[0.2em] text-emerald-700 flex items-center gap-2">
-                    <MapIcon size={12} /> SPATIAL CORE
+            {/* Visual Board */}
+            <div className="grid grid-cols-1 xl:grid-cols-5 gap-8">
+              <div className="xl:col-span-3 h-[500px] bg-white border border-gray-100 rounded-2xl shadow-sm overflow-hidden flex flex-col group">
+                <div className="p-4 border-b border-gray-50 flex items-center justify-between bg-gray-50/30">
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-emerald-600 flex items-center gap-2">
+                    <MapIcon size={14} /> Spatial Distribution
                   </span>
                 </div>
-                <div className="flex-1 grayscale-[0.5] hover:grayscale-0 transition-all duration-700">
+                <div className="flex-1">
                   <MapComponent 
                     locations={filteredData.locations} 
                     onSiteClick={(ref: string) => setSelectedSite(ref)}
@@ -159,27 +151,25 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className="bg-[#0F160F] border border-emerald-900/10 rounded-2xl p-6 shadow-2xl flex flex-col">
-                <div className="flex items-center justify-between mb-8">
-                  <span className="text-[10px] font-black uppercase tracking-[0.2em] text-emerald-700 flex items-center gap-2">
-                    <BarChart3 size={12} /> CHEMICAL ANALYTICS
-                  </span>
-                </div>
+              <div className="xl:col-span-2 h-[500px] bg-white border border-gray-100 rounded-2xl p-6 shadow-sm flex flex-col">
+                <span className="text-[10px] font-bold uppercase tracking-widest text-emerald-600 flex items-center gap-2 mb-6">
+                  <BarChart3 size={14} /> Site Richness
+                </span>
                 <div className="flex-1">
                   <AnalyticsCharts distribution={filteredData.distribution} />
                 </div>
               </div>
             </div>
 
-            {/* Molecule Library Cluster */}
-            <div className="space-y-8">
-              <div className="flex items-center justify-between">
-                <h3 className="text-lg font-black text-emerald-500 uppercase tracking-widest flex items-center gap-3">
-                  <Microscope size={20} /> Molecular Repository
+            {/* Molecular Grid */}
+            <div className="space-y-6">
+              <div className="flex items-center justify-between border-b border-gray-100 pb-4">
+                <h3 className="text-lg font-bold text-[#1A2F1A] flex items-center gap-3">
+                  <Microscope size={20} className="text-emerald-600" /> Molecular Library
                 </h3>
-                <span className="bg-emerald-900/20 text-emerald-500 px-4 py-1.5 rounded-full text-[10px] font-black border border-emerald-500/20">
-                  {filteredData.distribution.length} COMPOUNDS DETECTED
-                </span>
+                <div className="text-[10px] font-bold text-gray-400">
+                   RESULTADOS: <span className="text-[#1A2F1A]">{filteredData.distribution.length}</span>
+                </div>
               </div>
               
               <MoleculeCatalog 
@@ -187,28 +177,18 @@ export default function Home() {
                 distribution={filteredData.distribution} 
               />
             </div>
-
-            {/* Footer Reference */}
-            <footer className="pt-20 pb-10 border-t border-emerald-900/10 opacity-30 text-center">
-               <p className="text-[10px] uppercase tracking-[0.4em] font-bold">Iterative Phytochemical Intelligence Platform</p>
-            </footer>
           </div>
         </div>
       </main>
 
       <style jsx global>{`
-        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
-        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
-        .custom-scrollbar::-webkit-scrollbar-thumb { background: #065f46; border-radius: 10px; }
+        .custom-scrollbar::-webkit-scrollbar { width: 5px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: white; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #E5E7EB; border-radius: 10px; }
         .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #10b981; }
         
         .leaflet-container { 
-          background: #0A0F0A !important;
-          border-radius: 0 0 1rem 1rem;
-        }
-        .glass {
-          background: rgba(15, 22, 15, 0.7);
-          backdrop-filter: blur(20px);
+          background: #F9FAFB !important;
         }
       `}</style>
     </div>

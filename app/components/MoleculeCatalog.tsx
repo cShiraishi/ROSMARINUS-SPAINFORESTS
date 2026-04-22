@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { Search, ChevronRight, Activity } from "lucide-react";
+import { Activity } from "lucide-react";
 
 interface Molecule {
   "Rt (min)": number;
@@ -24,45 +24,43 @@ export default function MoleculeCatalog({ smiles, distribution }: { smiles: Mole
   );
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 pb-20">
       {filtered.map((mol) => {
         const distMatch = distribution.find(d => d.Compound === mol.Compound);
         const foundIn = distMatch ? loc_cols.filter(l => (distMatch as any)[l] > 0) : [];
 
         return (
-          <div key={mol.Compound} className="bg-[#0F160F] border border-emerald-900/10 rounded-2xl p-6 flex flex-col group hover:border-emerald-500/30 transition-all duration-300">
+          <div key={mol.Compound} className="bg-white border border-gray-100 rounded-2xl p-5 flex flex-col group hover:border-emerald-500/20 hover:shadow-xl hover:shadow-emerald-900/5 transition-all duration-500">
             <div className="flex justify-between items-start mb-6">
               <div>
-                <h4 className="font-bold text-gray-100 text-sm leading-tight group-hover:text-emerald-400 transition-colors uppercase tracking-wider">{mol.Compound}</h4>
-                <div className="flex items-center gap-2 mt-2">
-                  <span className="text-[10px] bg-emerald-500/10 text-emerald-500 px-2 py-0.5 rounded font-black tracking-widest border border-emerald-500/10">
-                    RT: {mol["Rt (min)"]}
-                  </span>
-                </div>
+                <h4 className="font-bold text-gray-800 text-xs leading-tight uppercase tracking-widest">{mol.Compound}</h4>
+                <p className="text-[10px] text-gray-400 font-bold mt-1">RT: {mol["Rt (min)"]} MIN</p>
               </div>
-              <Activity size={16} className="text-emerald-900/40 group-hover:text-emerald-500 transition-colors" />
+              <div className="w-8 h-8 bg-emerald-50 rounded-lg flex items-center justify-center text-emerald-500 transition-colors">
+                <Activity size={14} />
+              </div>
             </div>
             
-            <div className="aspect-square bg-white rounded-xl mb-6 flex items-center justify-center p-6 relative overflow-hidden ring-1 ring-emerald-500/5 group-hover:ring-emerald-500/20 transition-all">
+            <div className="aspect-square bg-[#F9FAFB] rounded-xl mb-6 flex items-center justify-center p-4 relative overflow-hidden group-hover:bg-white transition-colors duration-500">
               <img 
                 src={`/ROSMARINUS-SPAINFORESTS/mol_images/${mol.Compound.trim().replace(/\//g, '_').replace(/ /g, '_')}.svg`}
                 alt={mol.Compound}
-                className="max-h-full max-w-full mix-blend-multiply opacity-80 group-hover:opacity-100 transition-opacity duration-500"
+                className="max-h-full max-w-full mix-blend-multiply opacity-70 group-hover:opacity-100 transition-all duration-700"
                 onError={(e) => { (e.target as any).style.display = 'none'; }}
               />
             </div>
 
             <div className="mt-auto space-y-4">
-               <div className="flex flex-wrap gap-1">
+              <div className="flex flex-wrap gap-1">
                 {loc_cols.map(l => (
-                  <span key={l} className={`text-[9px] px-2 py-0.5 rounded-md font-bold transition-all ${foundIn.includes(l) ? 'bg-emerald-500 text-black shadow-[0_0_10px_rgba(16,185,129,0.3)]' : 'bg-emerald-900/10 text-emerald-900 ring-1 ring-emerald-900/20'}`}>
+                  <span key={l} className={`text-[9px] px-1.5 py-0.5 rounded font-black transition-all ${foundIn.includes(l) ? 'bg-emerald-500 text-white shadow-sm' : 'bg-gray-100 text-gray-300'}`}>
                     {l}
                   </span>
                 ))}
               </div>
 
-              <div className="bg-black/40 p-3 rounded-xl border border-emerald-900/5 group-hover:border-emerald-500/10 transition-colors">
-                <code className="text-[10px] text-emerald-800 break-all leading-relaxed font-mono opacity-60 group-hover:opacity-100 transition-opacity">
+              <div className="p-2.5 bg-gray-50 rounded-lg border border-gray-100 group-hover:bg-white transition-colors">
+                <code className="text-[9px] text-gray-400 break-all leading-tight font-mono block">
                   {mol.SMILES}
                 </code>
               </div>
