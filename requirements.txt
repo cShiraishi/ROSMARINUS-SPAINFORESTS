@@ -1,6 +1,0 @@
-streamlit
-pandas
-plotly
-rdkit
-openpyxl
-requests
