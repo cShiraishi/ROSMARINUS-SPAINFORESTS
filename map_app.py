@@ -3,351 +3,309 @@ import pandas as pd
 import re
 import os
 import plotly.express as px
-import requests
+import plotly.graph_objects as go
+from PIL import Image
 
+# --- CONFIGURATION ---
+st.set_page_config(
+    page_title="ROSMARINUS-SPAINFORESTS | Phytochemical Repository",
+    page_icon="🌿",
+    layout="wide",
+    initial_sidebar_state="expanded"
+)
+
+# --- CSS INJECTION ---
+def local_css(file_name):
+    with open(file_name) as f:
+        st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
+
+if os.path.exists("style.css"):
+    local_css("style.css")
+else:
+    # Fallback basic styling if file is missing
+    st.markdown("""
+        <style>
+        .main-title { font-size: 32px; color: #2D5A27; font-weight: bold; }
+        .mol-card { border: 1px solid #ddd; padding: 10px; border-radius: 10px; margin-bottom: 10px; }
+        </style>
+    """, unsafe_allow_html=True)
+
+# --- UTILITIES ---
 def get_mol_image_path(compound_name):
     """Checks if a pre-generated SVG exists for the compound."""
     base_dir = os.path.dirname(os.path.abspath(__file__))
     safe_name = str(compound_name).strip().replace('/', '_').replace(' ', '_')
     img_path = os.path.join(base_dir, 'mol_images', f"{safe_name}.svg")
     return img_path if os.path.exists(img_path) else None
-    
-from PIL import Image
-
-# Configures the page
-st.set_page_config(
-    page_title="Salvia rosmarinus - Spanish Forest Locations",
-    page_icon="🌿",
-    layout="wide"
-)
-
-st.title("🌿 ROSMARINUS-SPAINFORESTS: A Phytochemical Essential Oil Repository of Salvia rosmarinus")
-st.subheader("Geographical Distribution of Samples from Spanish Forests")
-
-st.markdown("""
-This interactive tracking repository documents the geographical and environmental provenance of **Salvia rosmarinus** (Rosemary) essential oil samples collected across endemic populations in the Iberian Peninsula.
-""")
 
 def dms_to_decimal(dms_str, direction):
     """Converts Degrees Minutes Seconds to Decimal Degrees."""
     try:
-        # Regex to find degrees, minutes, seconds
         match = re.search(r"(\d+)°(\d+)′?([\d.]+)?″?", dms_str)
-        if not match:
-            return None
-        
+        if not match: return None
         degrees = float(match.group(1))
         minutes = float(match.group(2))
         seconds = float(match.group(3)) if match.group(3) else 0.0
-        
         decimal = degrees + (minutes / 60.0) + (seconds / 3600.0)
-        
-        if direction in ['S', 'W', 'O']:
-            decimal *= -1
-            
+        if direction in ['S', 'W', 'O']: decimal *= -1
         return decimal
-    except Exception as e:
-        return None
+    except Exception: return None
 
+@st.cache_data
 def load_and_process_data():
     base_dir = os.path.dirname(os.path.abspath(__file__))
     file_path = os.path.join(base_dir, 'localization_data.xlsx')
-    if not os.path.exists(file_path):
-        st.error(f"File not found: {file_path}")
-        return None
+    if not os.path.exists(file_path): return None
     
-    # Read the Excel file
     df = pd.read_excel(file_path)
-    
-    # Transpose the data
     df_t = df.set_index(df.columns[0]).transpose()
     df_t.columns = df_t.columns.str.strip()
     
-    # Rename columns for easier access
-    # Note: Longitude (N) appears to be Latitude, and Latitude (W) appears to be Longitude
-    # We will check the labels and convert
     processed_data = []
-    
     for idx, row in df_t.iterrows():
-        name = idx
         loc_ref = row.get('Location', idx)
         munic_raw = str(row.get('Munic/province', 'Unknown'))
-        city = munic_raw
-        prov = munic_raw
+        city, prov = (munic_raw.split('/') + ['Unknown'])[:2] if '/' in munic_raw else (munic_raw, munic_raw)
         
-        if '/' in munic_raw:
-            parts = munic_raw.split('/')
-            city = parts[0].strip()
-            prov = parts[1].strip()
+        # Mapping known abbreviations
+        mapping = {
+            'Vald.': 'Valdemanco', 'Carbo': 'Carboneras', 'Albuñu.': 'Albuñuelas',
+            'GU': 'Guadalajara', 'NA': 'Navarra', 'M': 'Madrid', 
+            'AB': 'Albacete', 'GR': 'Granada', 'AL': 'Almería'
+        }
+        for k, v in mapping.items():
+            city = city.replace(k, v)
+            prov = prov.replace(k, v)
             
-        city = city.replace('Vald.', 'Valdemanco')
-        city = city.replace('Carbo', 'Carboneras')
-        city = city.replace('Albuñu.', 'Albuñuelas')
-        
-        prov = prov.replace('GU', 'Guadalajara')
-        prov = prov.replace('NA', 'Navarra')
-        prov = prov.replace('M', 'Madrid')
-        prov = prov.replace('AB', 'Albacete')
-        prov = prov.replace('GR', 'Granada')
-        prov = prov.replace('AL', 'Almería')
-            
-        # Determine lat/lon from the unusual labels
-        lat_raw = row.get('Longitude (N)')
-        lon_raw = row.get('Latitude (W)')
-        
-        lat = dms_to_decimal(str(lat_raw), 'N')
-        lon = dms_to_decimal(str(lon_raw), 'W')
+        lat = dms_to_decimal(str(row.get('Longitude (N)')), 'N')
+        lon = dms_to_decimal(str(row.get('Latitude (W)')), 'W')
         
         if lat is not None and lon is not None:
-            # L5 and L6 are the same City but different coordinates.
-            # We differentiate them for clarity in the map and legend.
             display_city = city
             if loc_ref == 'L5': display_city = f"{city} (A)"
             if loc_ref == 'L6': display_city = f"{city} (B)"
             
-            unique_region_id = f"{loc_ref} - {display_city}"
             processed_data.append({
-                'Name': name,
-                'Ref': loc_ref,
-                'Region': unique_region_id,
-                'City': city,
-                'Province': prov,
-                'lat': lat,
-                'lon': lon,
+                'Name': idx, 'Ref': loc_ref, 'Region': f"{loc_ref} - {display_city}",
+                'City': city.strip(), 'Province': prov.strip(), 'lat': lat, 'lon': lon,
                 'Altitude': row.get('Altitude (m)', 'N/A'),
                 'Rainfall (mm)': row.get('Rainfall (mm)', 'N/A'),
                 'Mean Ann T (°C)': row.get('Mean Ann T (°C)', 'N/A'),
                 'Soil reaction': row.get('Soil reaction', 'N/A'),
                 'Sampling Date': row.get('Sampling Date', 'N/A')
             })
-            
     return pd.DataFrame(processed_data)
 
+@st.cache_data
 def load_smiles_data():
-    base_dir = os.path.dirname(os.path.abspath(__file__))
-    file_path = os.path.join(base_dir, 'Smiles.xlsx')
-    if not os.path.exists(file_path):
-        return None
-    
-    # Read the Excel file
-    df = pd.read_excel(file_path)
-    
-    # Drop rows that are entirely empty
-    df = df.dropna(how='all')
-    
-    # Safely convert nº to int if it's not nan
+    file_path = 'Smiles.xlsx'
+    if not os.path.exists(file_path): return None
+    df = pd.read_excel(file_path).dropna(how='all')
     if 'nº ' in df.columns:
         df['nº '] = df['nº '].apply(lambda x: str(int(x)) if pd.notna(x) else 'N/A')
-        
     df = df.fillna('N/A')
+    return df[df['Compound'] != 'N/A'].reset_index(drop=True)
 
-    # Drop rows that don't have a valid Compound name
-    df = df[df['Compound'] != 'N/A'].reset_index(drop=True)
-    return df
-
+@st.cache_data
 def load_chemical_distribution():
-    base_dir = os.path.dirname(os.path.abspath(__file__))
-    file_path = os.path.join(base_dir, 'Smiles.xlsx')
-    if not os.path.exists(file_path):
-        return None
-    
+    file_path = 'Smiles.xlsx'
+    if not os.path.exists(file_path): return None
     try:
-        # Sheet3 contains the distribution across L1-L8
-        df = pd.read_excel(file_path, sheet_name='Sheet3')
-        df = df.dropna(subset=['Compound'])
-        
-        # Helper to clean "0.55±0.04a" strings
+        df = pd.read_excel(file_path, sheet_name='Sheet3').dropna(subset=['Compound'])
         def extract_val(v):
-            if pd.isna(v) or v == 'N/A' or v == '-': return 0.0
+            if pd.isna(v) or v in ['N/A', '-']: return 0.0
             try:
-                s = str(v).split('±')[0].strip()
-                s = re.sub(r'[^0-9.]', '', s)
+                s = re.sub(r'[^0-9.]', '', str(v).split('±')[0].strip())
                 return float(s) if s else 0.0
             except: return 0.0
-            
         loc_cols = ['L1', 'L2', 'L3', 'L4', 'L5', 'L6', 'L7', 'L8']
-        for col in loc_cols:
-            df[col] = df[col].apply(extract_val)
-            
+        for col in loc_cols: df[col] = df[col].apply(extract_val)
         return df
-    except Exception:
-        return None
+    except Exception: return None
 
+# --- DATA INITIALIZATION ---
 data = load_and_process_data()
 smiles_data = load_smiles_data()
 dist_data = load_chemical_distribution()
 
 if data is None or data.empty:
-    st.warning("Could not load sample data.")
+    st.error("⚠️ Primary data assets missing. Please verify the repository structure.")
     st.stop()
 
 # --- SIDEBAR ---
-base_dir = os.path.dirname(os.path.abspath(__file__))
-logo_path_png = os.path.join(base_dir, 'logo.png')
-logo_path_jpg = os.path.join(base_dir, 'logo.jpg')
+with st.sidebar:
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    for ext in ['png', 'jpg']:
+        path = os.path.join(base_dir, f'logo.{ext}')
+        if os.path.exists(path):
+            st.image(path, use_container_width=True)
+            break
+            
+    st.markdown('<div class="sidebar-header">🌿 ROSMARINUS CORE</div>', unsafe_allow_html=True)
+    st.info("Tracking the phytochemical footprint of *Salvia rosmarinus* across Spanish endemic forests.")
+    
+    st.divider()
+    st.markdown("### 📊 Dataset Stats")
+    c1, c2 = st.columns(2)
+    c1.metric("Samples", len(data))
+    c2.metric("Sites", data['Region'].nunique())
+    st.metric("Compounds Isolated", len(smiles_data) if smiles_data is not None else 0)
+    
+    st.divider()
+    st.markdown("### 📖 Research Context")
+    st.caption("""
+    This platform integrates climatic descriptors with chemical chromatography to map environmental influence on rosemary oil composition.
+    """)
+    st.markdown("---")
+    st.markdown("© 2024 Rosmarinus Project")
 
-if os.path.exists(logo_path_png):
-    try:
-        logo = Image.open(logo_path_png)
-        st.sidebar.image(logo, use_container_width=True)
-    except Exception as e:
-        st.sidebar.error(f"Error loading logo: {e}")
-elif os.path.exists(logo_path_jpg):
-    try:
-        logo = Image.open(logo_path_jpg)
-        st.sidebar.image(logo, use_container_width=True)
-    except Exception as e:
-        st.sidebar.error(f"Error loading logo: {e}")
+# --- MAIN INTERFACE ---
+st.markdown('<h1 class="main-title">🌿 ROSMARINUS-SPAINFORESTS</h1>', unsafe_allow_html=True)
+st.markdown("""
+<div style="font-size: 1.2rem; color: #4A7C44; margin-bottom: 2rem;">
+    Phytochemical Essential Oil Repository & Geographical Distribution Analytics
+</div>
+""", unsafe_allow_html=True)
 
-st.sidebar.title(" Quick Panel")
-st.sidebar.markdown("Explore climatic descriptors and phytochemical taxonomy summaries.")
+# Top KPI Row with enhanced styling
+kpi1, kpi2, kpi3, kpi4 = st.columns(4)
+with kpi1:
+    st.markdown('<div class="metric-card"><strong>Relief & Altitude</strong><br><span style="font-size: 1.5rem; color: #2D5A27;">260 - 1120 m</span></div>', unsafe_allow_html=True)
+with kpi2:
+    st.markdown('<div class="metric-card"><strong>Mean Temperature</strong><br><span style="font-size: 1.5rem; color: #2D5A27;">10.9 - 18.0 °C</span></div>', unsafe_allow_html=True)
+with kpi3:
+    st.markdown('<div class="metric-card"><strong>Rainfall Regime</strong><br><span style="font-size: 1.5rem; color: #2D5A27;">267 - 688 mm</span></div>', unsafe_allow_html=True)
+with kpi4:
+    st.markdown('<div class="metric-card"><strong>Bio-Diversity</strong><br><span style="font-size: 1.5rem; color: #2D5A27;">+50 Volatiles</span></div>', unsafe_allow_html=True)
 
-# Sidebar Metric
-total_locs = len(data)
-total_regions = data['Region'].nunique() if data is not None else 0
-total_compounds = len(smiles_data) if smiles_data is not None else 0
-st.sidebar.metric(label="Total Samples", value=f"{total_locs} Samples")
-st.sidebar.metric(label="Sampling Sites", value=f"{total_regions} Unique Sites")
-st.sidebar.metric(label="Extracted Compounds", value=f"{total_compounds} Molecules")
-st.sidebar.divider()
+st.write("")
 
-
-# --- TOP KPI ROW ---
-col1, col2, col3, col4 = st.columns(4)
-with col1:
-    st.metric("Altitude & Relief", "260 - 1120 m")
-with col2:
-    st.metric("Historical Temperatures", "10.9 to 18.0 °C")
-with col3:
-    st.metric("Rainfall Regime", "267 - 688 mm")
-with col4:
-    st.metric("Diversity", f"+{total_compounds} Volatiles")
-
-st.write("---")
-
-# --- TABS FOR CLEAN LAYOUT ---
-tab1, tab2, tab0, tab3 = st.tabs([
-    "📍 Geographic & Climate Mapping", 
-    "🧪 Chemical Profile (SMILES)", 
-    "📊 Overall Analytics", 
-    "🗃️ Raw Data Repository"
+# --- TABS ---
+tabs = st.tabs([
+    "📍 Geographic Distribution", 
+    "📊 Comparative Analytics", 
+    "🧪 Molecular Library", 
+    "🗃️ Raw Repository"
 ])
 
-with tab0:
-    st.markdown("### 📈 Multivariate Data Insights")
+# TAB 1: MAPPING
+with tabs[0]:
+    st.markdown("### 🌍 Spatial Mapping of Sampling Sites")
+    st.markdown("Interactive distribution of *Salvia rosmarinus* populations across the Iberian Peninsula.")
+    
+    fig = px.scatter_mapbox(
+        data, lat="lat", lon="lon", hover_name="Region",
+        hover_data={"lat": False, "lon": False, "Province": True, "Altitude": True, "Rainfall (mm)": True, "Mean Ann T (°C)": True},
+        color="Province", size_max=15, zoom=5.5,
+        center={"lat": data['lat'].mean(), "lon": data['lon'].mean()},
+        color_discrete_sequence=px.colors.qualitative.Dark2,
+        height=600
+    )
+    fig.update_layout(
+        mapbox_style="carto-positron", # Cleaner look
+        margin={"r":0,"t":0,"l":0,"b":0},
+        legend_title_text='Spanish Provinces'
+    )
+    fig.update_traces(marker=dict(size=18, opacity=0.9))
+    st.plotly_chart(fig, use_container_width=True)
+
+# TAB 2: ANALYTICS
+with tabs[1]:
+    st.markdown("### 📈 Multivariate Chemical Insights")
     
     if dist_data is not None:
-        c1, c2 = st.columns([2, 1])
+        col_a, col_b = st.columns([2, 1])
+        loc_cols = ['L1', 'L2', 'L3', 'L4', 'L5', 'L6', 'L7', 'L8']
         
-        with c1:
-            # Chart 1: Chemical Diversity per Location
-            loc_cols = ['L1', 'L2', 'L3', 'L4', 'L5', 'L6', 'L7', 'L8']
+        with col_a:
             diversity = (dist_data[loc_cols] > 0).sum().reset_index()
             diversity.columns = ['Site ID', 'Compound Count']
             
             fig_div = px.bar(
                 diversity, x='Site ID', y='Compound Count',
-                title="Chemical Diversity (Detected compounds per Site Ref)",
-                color='Compound Count',
-                color_continuous_scale='Viridis',
-                text_auto=True
+                color='Compound Count', color_continuous_scale='Greens',
+                text_auto=True, title="Chemical Richness per Sampling Site"
             )
+            fig_div.update_layout(plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)')
             st.plotly_chart(fig_div, use_container_width=True)
+        
+        with col_b:
+            st.markdown("#### Quantitative Summary")
+            st.dataframe(diversity.sort_values('Compound Count', ascending=False), hide_index=True, use_container_width=True)
             
-        with c2:
-            st.markdown("#### Site Summary")
-            st.write("Quantitative distribution of volatile profiles based on endemic forest sampling.")
-            st.dataframe(diversity, hide_index=True, use_container_width=True)
-
         st.divider()
-        
-        # Chart 2: Heatmap of main compounds
-        st.markdown("#### Presence Heatmap (Top 15 Compounds)")
-        # Get top 15 compounds by global presence
+        st.markdown("#### 🌡️ Presence Heatmap (Dominant Compounds)")
         dist_data['Global_Sum'] = dist_data[loc_cols].sum(axis=1)
-        top_compounds = dist_data.nlargest(15, 'Global_Sum')
-        
+        top_compounds = dist_data.nlargest(12, 'Global_Sum')
         heatmap_data = top_compounds.set_index('Compound')[loc_cols]
+        
         fig_heat = px.imshow(
-            heatmap_data,
-            labels=dict(x="Sampling Site", y="Compound", color="Rel. Concentration"),
-            x=loc_cols,
-            y=heatmap_data.index,
-            color_continuous_scale='GnBu',
+            heatmap_data, x=loc_cols, y=heatmap_data.index,
+            color_continuous_scale='YlGn', labels=dict(color="Concentration"),
             aspect="auto"
         )
         st.plotly_chart(fig_heat, use_container_width=True)
     else:
-        st.info("Distribution data not found in 'Smiles.xlsx -> Sheet3'.")
+        st.info("Distribution data currently being synthesized.")
 
-with tab1:
-    st.markdown("### Sample Distribution in the Iberian Peninsula")
-    # Main map
-    fig = px.scatter_mapbox(
-        data, 
-        lat="lat", 
-        lon="lon", 
-        hover_name="Region", 
-        hover_data={"lat": False, "lon": False, "Province": True, "Altitude": True, "Rainfall (mm)": True, "Mean Ann T (°C)": True, "Soil reaction": True, "Sampling Date": True},
-        labels={"Mean Ann T (°C)": "Mean Annual Temp (°C)", "Rainfall (mm)": "Rainfall (mm/yr)", "Soil reaction": "Soil Profile"},
-        color="Region",
-        size_max=15,
-        zoom=5.5, 
-        center={"lat": data['lat'].mean(), "lon": data['lon'].mean()},
-        height=550
-    )
-    fig.update_layout(
-        mapbox_style="open-street-map", 
-        margin={"r":0,"t":0,"l":0,"b":0},
-        legend_title_text='Sampling Sites'
-    )
-    fig.update_traces(marker=dict(size=14, opacity=0.8))
+# TAB 3: MOLECULAR LIBRARY
+with tabs[2]:
+    st.markdown("### 🧪 Essential Oil Molecular Library")
+    st.markdown("Catalog of isolated volatiles with SMILES strings and structural visualization.")
     
-    st.plotly_chart(fig, use_container_width=True)
-
-with tab2:
     if smiles_data is not None and not smiles_data.empty:
-        st.markdown("### Essential Oil Molecular Library")
+        # Search filter
+        search_query = st.text_input("🔍 Search compounds by name or SMILES", "").lower()
+        filtered_df = smiles_data[
+            smiles_data['Compound'].str.lower().str.contains(search_query) | 
+            smiles_data['SMILES'].str.lower().str.contains(search_query)
+        ]
         
-        # Add Cards representation
-        cols = st.columns(4)
-        for idx, row in smiles_data.iterrows():
-            col = cols[idx % 4]
-            with col:
-                with st.container(border=True):
-                    st.markdown(f"**{row['Compound']}**")
-                    st.caption(f"⏱️ **Rt:** `{row['Rt (min)']} min`")
-                    
-                    # Static Image Loading (Anti-libXrender Error System)
-                    img_path = get_mol_image_path(row['Compound'])
-                    if img_path:
-                        with open(img_path, 'r') as f:
-                            svg_content = f.read()
-                        st.image(svg_content, use_container_width=True)
-                    else:
-                        st.warning("Structure drawing not found in repository.")
-                    
-                    st.code(row['SMILES'])
-                    
-                    # Add locations info if available
-                    if dist_data is not None:
-                        comp_name = row['Compound']
-                        match = dist_data[dist_data['Compound'] == comp_name]
-                        if not match.empty:
-                            loc_cols = ['L1', 'L2', 'L3', 'L4', 'L5', 'L6', 'L7', 'L8']
-                            found_in = [l for l in loc_cols if match.iloc[0][l] > 0]
-                            if found_in:
-                                st.markdown(f"**📍 Detected in:** {', '.join(found_in)}")
+        m_cols = st.columns(4)
+        for idx, row in filtered_df.iterrows():
+            with m_cols[idx % 4]:
+                st.markdown(f"""
+                <div class="mol-card">
+                    <div class="mol-title">{row['Compound']}</div>
+                    <div class="mol-rt">Retention Time: <b>{row['Rt (min)']} min</b></div>
+                </div>
+                """, unsafe_allow_html=True)
+                
+                img_path = get_mol_image_path(row['Compound'])
+                if img_path:
+                    with open(img_path, 'r') as f:
+                        st.image(f.read(), use_container_width=True)
+                else:
+                    st.caption("📷 *Structure Rendering unavailable*")
+                
+                st.code(row['SMILES'], language="text")
+                
+                if dist_data is not None:
+                    match = dist_data[dist_data['Compound'] == row['Compound']]
+                    if not match.empty:
+                        found_in = [l for l in loc_cols if match.iloc[0][l] > 0]
+                        if found_in:
+                            st.markdown(f"<span style='font-size:0.8rem;'>📍 Found: {', '.join(found_in)}</span>", unsafe_allow_html=True)
+                st.markdown("<br>", unsafe_allow_html=True)
     else:
-        st.warning("Molecule data not found.")
+        st.warning("Molecule library is empty.")
 
-with tab3:
-    st.markdown("### Extensive Repository Database")
-    st.write("Query or export the comprehensive dataset matrices underpinning this study.")
+# TAB 4: RAW DATA
+with tabs[3]:
+    st.markdown("### 🗃️ Raw Data Repository")
+    st.write("Access the underlying data matrices for transparency and further research.")
     
-    with st.expander("📍 Geographic Data (localization_data.xlsx)", expanded=True):
-        st.dataframe(data, use_container_width=True, hide_index=True)
-        
-    with st.expander("🧪 Chemical Data (Smiles.xlsx)", expanded=False):
-        if smiles_data is not None:
-            st.dataframe(smiles_data, use_container_width=True, hide_index=True)
+    exp1 = st.expander("📍 Geographic Metadata (localization_data.xlsx)", expanded=True)
+    exp1.dataframe(data, use_container_width=True, hide_index=True)
+    
+    if smiles_data is not None:
+        exp2 = st.expander("🧪 Chemical Library Source (Smiles.xlsx)", expanded=False)
+        exp2.dataframe(smiles_data, use_container_width=True, hide_index=True)
+
+st.write("---")
+st.markdown("""
+<div style="text-align: center; color: #888; font-size: 0.9rem;">
+    This dashboard was developed to support multivariate analysis in ethnobotanical studies. <br>
+    For technical inquiries, please refer to the project documentation.
+</div>
+""", unsafe_allow_html=True)
