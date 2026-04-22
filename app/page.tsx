@@ -18,7 +18,7 @@ export default function Home() {
       <nav className="sticky top-0 z-50 glass border-b border-forest/10 px-6 py-4">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <div className="flex items-center space-x-3">
-            <img src="/logo.png" alt="Logo" className="w-10 h-10 object-contain" />
+            <img src="/rosmarinus-spainforests/logo.png" alt="Logo" className="w-10 h-10 object-contain" />
             <div>
               <h1 className="font-bold text-forest leading-none">Rosmarinus</h1>
               <p className="text-[10px] text-sage font-medium tracking-widest uppercase">Spainforests</p>
@@ -104,7 +104,7 @@ export default function Home() {
 
       <footer className="mt-32 py-12 border-t border-gray-100 text-center">
         <div className="max-w-7xl mx-auto px-6">
-          <img src="/logo.png" alt="Logo" className="w-12 h-12 mx-auto mb-4 opacity-50 transition-opacity hover:opacity-100" />
+          <img src="/rosmarinus-spainforests/logo.png" alt="Logo" className="w-12 h-12 mx-auto mb-4 opacity-50 transition-opacity hover:opacity-100" />
           <p className="text-gray-400 text-sm">© 2024 Rosmarinus Project</p>
           <p className="text-[10px] text-gray-300 mt-2 uppercase tracking-widest">Scientific Biodiversity Analysis Platform</p>
         </div>

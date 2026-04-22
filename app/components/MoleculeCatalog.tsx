@@ -52,7 +52,7 @@ export default function MoleculeCatalog({ smiles }: { smiles: Molecule[] }) {
               
               <div className="flex-1 min-h-[150px] bg-gray-50 rounded-xl mb-3 flex items-center justify-center overflow-hidden p-2">
                 <img 
-                  src={`/mol_images/${mol.Compound.trim().replace(/\//g, '_').replace(/ /g, '_')}.svg`}
+                  src={`/rosmarinus-spainforests/mol_images/${mol.Compound.trim().replace(/\//g, '_').replace(/ /g, '_')}.svg`}
                   alt={mol.Compound}
                   className="max-h-full max-w-full"
                   onError={(e) => { (e.target as any).style.display = 'none'; }}
