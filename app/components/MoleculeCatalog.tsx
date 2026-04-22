@@ -1,7 +1,6 @@
 "use client";
 import { useState } from "react";
 import { Search } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
 
 interface Molecule {
   "Rt (min)": number;
@@ -9,8 +8,14 @@ interface Molecule {
   SMILES: string;
 }
 
-export default function MoleculeCatalog({ smiles }: { smiles: Molecule[] }) {
+interface Distribution {
+  Compound: string;
+  L1: number; L2: number; L3: number; L4: number; L5: number; L6: number; L7: number; L8: number;
+}
+
+export default function MoleculeCatalog({ smiles, distribution }: { smiles: Molecule[], distribution: Distribution[] }) {
   const [search, setSearch] = useState("");
+  const loc_cols = ['L1', 'L2', 'L3', 'L4', 'L5', 'L6', 'L7', 'L8'];
 
   const filtered = smiles.filter(
     (m) =>
@@ -19,38 +24,33 @@ export default function MoleculeCatalog({ smiles }: { smiles: Molecule[] }) {
   );
 
   return (
-    <div className="space-y-6">
-      <div className="relative max-w-md mx-auto">
-        <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
-        <input
-          type="text"
-          placeholder="Search molecules or SMILES..."
-          className="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-forest focus:border-transparent outline-none transition-all bg-white"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
+    <div className="space-y-8">
+      <div className="flex justify-start">
+        <div className="relative w-full max-w-md">
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-4 h-4" />
+          <input
+            type="text"
+            placeholder="Search Chemical Library..."
+            className="w-full pl-9 pr-4 py-2 text-sm border-b-2 border-gray-200 focus:border-[#2D5A27] outline-none transition-colors bg-transparent"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+        </div>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        <AnimatePresence>
-          {filtered.map((mol, index) => (
-            <motion.div
-              key={mol.Compound}
-              layout
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.9 }}
-              transition={{ duration: 0.2 }}
-              className="bg-white p-5 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow flex flex-col"
-            >
-              <div className="flex justify-between items-start mb-3">
-                <h3 className="font-bold text-forest text-sm">{mol.Compound}</h3>
-                <span className="text-[10px] bg-sage/10 text-sage px-2 py-1 rounded-full font-medium">
-                  {mol["Rt (min)"]} min
-                </span>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        {filtered.map((mol) => {
+          const distMatch = distribution.find(d => d.Compound === mol.Compound);
+          const foundIn = distMatch ? loc_cols.filter(l => (distMatch as any)[l] > 0) : [];
+
+          return (
+            <div key={mol.Compound} className="bg-white border-2 border-gray-100 rounded-lg p-5 flex flex-col h-full hover:border-[#A3C9A8] transition-colors">
+              <div className="mb-4">
+                <p className="font-bold text-[#1A2F1A] text-base leading-tight">{mol.Compound}</p>
+                <p className="text-[11px] text-[#4A7C44] mt-1">⏱️ Rt: <b>{mol["Rt (min)"]} min</b></p>
               </div>
               
-              <div className="flex-1 min-h-[150px] bg-gray-50 rounded-xl mb-3 flex items-center justify-center overflow-hidden p-2">
+              <div className="flex-1 flex items-center justify-center min-h-[160px] bg-gray-50 rounded mb-4 p-2 relative overflow-hidden">
                 <img 
                   src={`/ROSMARINUS-SPAINFORESTS/mol_images/${mol.Compound.trim().replace(/\//g, '_').replace(/ /g, '_')}.svg`}
                   alt={mol.Compound}
@@ -59,12 +59,20 @@ export default function MoleculeCatalog({ smiles }: { smiles: Molecule[] }) {
                 />
               </div>
 
-              <div className="bg-gray-50 p-2 rounded-lg mt-auto overflow-hidden">
-                <code className="text-[10px] text-gray-500 break-all">{mol.SMILES}</code>
+              <div className="space-y-3">
+                <div className="bg-gray-100 p-2 rounded font-mono text-[9px] text-gray-600 break-all leading-tight">
+                  {mol.SMILES}
+                </div>
+                
+                {foundIn.length > 0 && (
+                  <div className="text-[10px] text-gray-600">
+                    <span className="font-bold">📍 Detected in:</span> {foundIn.join(', ')}
+                  </div>
+                )}
               </div>
-            </motion.div>
-          ))}
-        </AnimatePresence>
+            </div>
+          );
+        })}
       </div>
     </div>
   );

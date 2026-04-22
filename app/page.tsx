@@ -1,114 +1,148 @@
-"use client";
 import dynamic from "next/dynamic";
-import Stats from "./components/Stats";
-import MoleculeCatalog from "./components/MoleculeCatalog";
-import AnalyticsCharts from "./components/AnalyticsCharts";
+import { Trees, Microscope, MapPin } from "lucide-react";
 import data from "../public/data.json";
 
-// Dynamic imports for components that use browser-only APIs
 const MapComponent = dynamic(() => import("./components/MapComponent"), {
   ssr: false,
-  loading: () => <div className="h-[500px] w-full bg-gray-100 animate-pulse rounded-2xl" />,
+  loading: () => <div className="h-[550px] w-full bg-gray-100 animate-pulse rounded-xl" />,
 });
+
+const MoleculeCatalog = dynamic(() => import("./components/MoleculeCatalog"), { ssr: false });
+const AnalyticsCharts = dynamic(() => import("./components/AnalyticsCharts"), { ssr: false });
 
 export default function Home() {
   return (
-    <main className="min-h-screen pb-20">
-      {/* Navbar */}
-      <nav className="sticky top-0 z-50 glass border-b border-forest/10 px-6 py-4">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <div className="flex items-center space-x-3">
-            <img src="/ROSMARINUS-SPAINFORESTS/logo.png" alt="Logo" className="w-10 h-10 object-contain" />
-            <div>
-              <h1 className="font-bold text-forest leading-none">Rosmarinus</h1>
-              <p className="text-[10px] text-sage font-medium tracking-widest uppercase">Spainforests</p>
-            </div>
+    <div className="flex min-h-screen bg-[#F8F9F8] text-[#1A2F1A] font-sans">
+      {/* --- SIDEBAR (Persistent) --- */}
+      <aside className="w-80 bg-[#f1f3f1] border-r border-gray-200 p-8 flex flex-col hidden lg:flex sticky top-0 h-screen">
+        <img src="/ROSMARINUS-SPAINFORESTS/logo.png" alt="Logo" className="w-full mb-8" />
+        
+        <h2 className="text-xl font-bold text-[#2D5A27] mb-2 flex items-center gap-2">
+          <span className="text-2xl">🌿</span> Quick Panel
+        </h2>
+        <p className="text-sm text-gray-600 mb-8 leading-relaxed">
+          Explore climatic descriptors and phytochemical taxonomy summaries.
+        </p>
+
+        <div className="space-y-6">
+          <div className="bg-white p-4 rounded-xl border border-gray-200 shadow-sm">
+            <p className="text-xs text-gray-500 uppercase font-bold tracking-wider mb-1">Total Samples</p>
+            <p className="text-2xl font-black text-[#2D5A27]">{data.locations.length} Samples</p>
           </div>
-          <div className="hidden md:flex space-x-8 text-sm font-medium text-gray-600">
-            <a href="#mapping" className="hover:text-forest transition-colors">Mapping</a>
-            <a href="#analytics" className="hover:text-forest transition-colors">Analytics</a>
-            <a href="#library" className="hover:text-forest transition-colors">Library</a>
-            <a href="#data" className="hover:text-forest transition-colors">Raw Data</a>
+          <div className="bg-white p-4 rounded-xl border border-gray-200 shadow-sm">
+            <p className="text-xs text-gray-500 uppercase font-bold tracking-wider mb-1">Sampling Sites</p>
+            <p className="text-2xl font-black text-[#2D5A27]">{data.locations.length} Unique Sites</p>
+          </div>
+          <div className="bg-white p-4 rounded-xl border border-gray-200 shadow-sm">
+            <p className="text-xs text-gray-500 uppercase font-bold tracking-wider mb-1">Extracted Compounds</p>
+            <p className="text-2xl font-black text-[#2D5A27]">{data.smiles.length} Molecules</p>
           </div>
         </div>
-      </nav>
 
-      {/* Hero */}
-      <section className="bg-gradient-to-b from-forest/5 to-transparent pt-16 pb-12 px-6">
-        <div className="max-w-7xl mx-auto text-center">
-          <h2 className="text-4xl md:text-6xl font-black text-forest mb-4">
-            Phytochemical Essential Oil Repository
-          </h2>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            Interactive tracking of <strong>Salvia rosmarinus</strong> (Rosemary) environmental provenance 
-            across endemic populations in the Iberian Peninsula.
+        <div className="mt-auto pt-8 border-t border-gray-200">
+          <p className="text-[10px] text-gray-400 uppercase tracking-widest text-center">
+            ROSMARINUS PROJECT © 2024
           </p>
         </div>
-      </section>
+      </aside>
 
-      <div className="max-w-7xl mx-auto space-y-24">
-        <Stats locations={data.locations.length} compounds={data.smiles.length} />
-
-        <section id="mapping" className="px-6 space-y-8">
-          <div className="flex items-center justify-between">
-            <h3 className="text-2xl font-bold text-forest">Spatial Distribution</h3>
-            <span className="text-sm text-gray-500 font-medium">8 Sampling Forests</span>
+      {/* --- MAIN CONTENT --- */}
+      <main className="flex-1 p-8 lg:p-12 overflow-y-auto">
+        <header className="mb-12">
+          <h1 className="text-3xl lg:text-4xl font-black text-[#2D5A27] mb-2">
+            🌿 ROSMARINUS-SPAINFORESTS: A Phytochemical Essential Oil Repository
+          </h1>
+          <h2 className="text-xl text-[#4A7C44] font-medium mb-6">
+            Geographical Distribution of Samples from Spanish Forests
+          </h2>
+          <div className="max-w-4xl p-4 bg-[#A3C9A8]/10 border-l-4 border-[#A3C9A8] text-sm text-gray-700 italic">
+            This interactive tracking repository documents the geographical and environmental provenance of <b>Salvia rosmarinus</b> essential oil samples collected across endemic populations in the Iberian Peninsula.
           </div>
-          <MapComponent locations={data.locations} />
-        </section>
+        </header>
 
-        <section id="analytics" className="px-6 space-y-8">
-          <h3 className="text-2xl font-bold text-forest">Comparative Analytics</h3>
-          <AnalyticsCharts distribution={data.distribution} />
-        </section>
-
-        <section id="library" className="px-6 space-y-8">
-          <h3 className="text-2xl font-bold text-forest">Molecular Library</h3>
-          <MoleculeCatalog smiles={data.smiles} />
-        </section>
-
-        <section id="data" className="px-6 space-y-8">
-          <h3 className="text-2xl font-bold text-forest">Raw Records</h3>
-          <div className="bg-white rounded-3xl border border-gray-100 shadow-sm overflow-hidden">
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm text-left">
-                <thead className="bg-gray-50 text-gray-500 uppercase text-[10px] font-bold">
-                  <tr>
-                    <th className="px-6 py-4">Ref</th>
-                    <th className="px-6 py-4">City</th>
-                    <th className="px-6 py-4">Lat</th>
-                    <th className="px-6 py-4">Lon</th>
-                    <th className="px-6 py-4">Altitude</th>
-                    <th className="px-6 py-4">Rainfall</th>
-                    <th className="px-6 py-4">Temp</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-gray-100">
-                  {data.locations.map((loc) => (
-                    <tr key={loc.ref} className="hover:bg-forest/[0.02] transition-colors">
-                      <td className="px-6 py-4 font-bold text-forest">{loc.ref}</td>
-                      <td className="px-6 py-4">{loc.city}</td>
-                      <td className="px-6 py-4 font-mono text-[11px]">{loc.lat.toFixed(4)}</td>
-                      <td className="px-6 py-4 font-mono text-[11px]">{loc.lon.toFixed(4)}</td>
-                      <td className="px-6 py-4">{loc.altitude}m</td>
-                      <td className="px-6 py-4">{loc.rainfall}mm</td>
-                      <td className="px-6 py-4">{loc.temp}°C</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+        {/* --- TOP METRICS ROW --- */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
+          <div className="border-b-2 border-gray-100 pb-4">
+            <p className="text-xs text-gray-400 font-bold uppercase mb-1">Altitude & Relief</p>
+            <p className="text-lg font-bold text-gray-800">260 - 1120 m</p>
           </div>
-        </section>
-      </div>
-
-      <footer className="mt-32 py-12 border-t border-gray-100 text-center">
-        <div className="max-w-7xl mx-auto px-6">
-          <img src="/ROSMARINUS-SPAINFORESTS/logo.png" alt="Logo" className="w-12 h-12 mx-auto mb-4 opacity-50 transition-opacity hover:opacity-100" />
-          <p className="text-gray-400 text-sm">© 2024 Rosmarinus Project</p>
-          <p className="text-[10px] text-gray-300 mt-2 uppercase tracking-widest">Scientific Biodiversity Analysis Platform</p>
+          <div className="border-b-2 border-gray-100 pb-4">
+            <p className="text-xs text-gray-400 font-bold uppercase mb-1">Historical Temps</p>
+            <p className="text-lg font-bold text-gray-800">10.9 to 18.0 °C</p>
+          </div>
+          <div className="border-b-2 border-gray-100 pb-4">
+            <p className="text-xs text-gray-400 font-bold uppercase mb-1">Rainfall Regime</p>
+            <p className="text-lg font-bold text-gray-800">267 - 688 mm</p>
+          </div>
+          <div className="border-b-2 border-gray-100 pb-4">
+            <p className="text-xs text-gray-400 font-bold uppercase mb-1">Diversity</p>
+            <p className="text-lg font-bold text-gray-800">+{data.smiles.length} Volatiles</p>
+          </div>
         </div>
-      </footer>
-    </main>
+
+        {/* --- TABS SECTION (Restored Logic) --- */}
+        <div className="space-y-16">
+          <section id="tab1">
+            <h3 className="text-xl font-bold text-[#2D5A27] mb-6 flex items-center gap-2">
+              📍 Geographic & Climate Mapping
+            </h3>
+            <MapComponent locations={data.locations} />
+          </section>
+
+          <section id="tab2">
+             <h3 className="text-xl font-bold text-[#2D5A27] mb-6 flex items-center gap-2">
+              🧪 Chemical Profile (SMILES)
+            </h3>
+            <MoleculeCatalog smiles={data.smiles} distribution={data.distribution} />
+          </section>
+
+          <section id="tab3">
+            <h3 className="text-xl font-bold text-[#2D5A27] mb-6 flex items-center gap-2">
+              📊 Overall Analytics
+            </h3>
+            <AnalyticsCharts distribution={data.distribution} />
+          </section>
+
+          <section id="tab4">
+            <h3 className="text-xl font-bold text-[#2D5A27] mb-6 flex items-center gap-2">
+              🗃️ Raw Data Repository
+            </h3>
+            <div className="space-y-8">
+              <div className="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm">
+                <div className="bg-gray-50 border-b border-gray-200 px-6 py-3 font-bold text-sm text-gray-600">
+                  📍 Geographic Data (localization_data.xlsx)
+                </div>
+                <div className="overflow-x-auto">
+                    <table className="w-full text-[11px] text-left">
+                      <thead>
+                        <tr className="bg-gray-50 border-b border-gray-100 text-gray-400">
+                          <th className="px-6 py-3">REF</th>
+                          <th className="px-6 py-3">CITY</th>
+                          <th className="px-6 py-3">LAT</th>
+                          <th className="px-6 py-3">LON</th>
+                          <th className="px-6 py-3">ALTITUDE</th>
+                          <th className="px-6 py-3">RAINFALL</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-gray-100">
+                        {data.locations.map(loc => (
+                          <tr key={loc.ref} className="hover:bg-gray-50">
+                            <td className="px-6 py-3 font-bold text-[#2D5A27]">{loc.ref}</td>
+                            <td className="px-6 py-3">{loc.city}</td>
+                            <td className="px-6 py-3 font-mono">{loc.lat.toFixed(4)}</td>
+                            <td className="px-6 py-3 font-mono">{loc.lon.toFixed(4)}</td>
+                            <td className="px-6 py-3">{loc.altitude}m</td>
+                            <td className="px-6 py-3">{loc.rainfall}mm</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
   );
 }
