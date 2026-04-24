@@ -44,7 +44,7 @@ export default function Home() {
       <aside className={`bg-[#F7F9F7] border-r border-gray-200 transition-all duration-500 ease-in-out flex flex-col ${isSidebarOpen ? 'w-80' : 'w-20'}`}>
         <div className="p-6 border-b border-gray-100">
           {isSidebarOpen ? (
-            <img src="/ROSMARINUS-SPAINFORESTS/logo.png" alt="Logo" className="w-full object-contain" />
+            <img src="/rosmarinus-spainforests/logo.png" alt="Logo" className="w-full object-contain" />
           ) : (
             <div className="w-10 h-10 bg-emerald-600 rounded-lg flex items-center justify-center font-black text-white mx-auto">R</div>
           )}

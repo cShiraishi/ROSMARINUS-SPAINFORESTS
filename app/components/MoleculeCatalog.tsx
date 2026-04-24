@@ -43,7 +43,7 @@ export default function MoleculeCatalog({ smiles, distribution }: { smiles: Mole
             
             <div className="aspect-square bg-[#F9FAFB] rounded-xl mb-6 flex items-center justify-center p-4 relative overflow-hidden group-hover:bg-white transition-colors duration-500">
               <img 
-                src={`/ROSMARINUS-SPAINFORESTS/mol_images/${mol.Compound.trim().replace(/\//g, '_').replace(/ /g, '_')}.svg`}
+                src={`/rosmarinus-spainforests/mol_images/${mol.Compound.trim().replace(/\//g, '_').replace(/ /g, '_')}.svg`}
                 alt={mol.Compound}
                 className="max-h-full max-w-full mix-blend-multiply opacity-70 group-hover:opacity-100 transition-all duration-700"
                 onError={(e) => { (e.target as any).style.display = 'none'; }}
