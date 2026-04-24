@@ -6,63 +6,71 @@ interface Distribution {
   L1: number; L2: number; L3: number; L4: number; L5: number; L6: number; L7: number; L8: number;
 }
 
-export default function AnalyticsCharts({ distribution }: { distribution: Distribution[] }) {
-  const loc_cols = ['L1', 'L2', 'L3', 'L4', 'L5', 'L6', 'L7', 'L8'];
-  
-  const richnessData = loc_cols.map(loc => ({
-    site: loc,
-    count: distribution.filter(d => (d as any)[loc] > 0).length
-  }));
+interface Props {
+  distribution: Distribution[];
+  selectedSite: string | null;
+}
+
+const LOC_COLS = ['L1', 'L2', 'L3', 'L4', 'L5', 'L6', 'L7', 'L8'] as const;
+
+export default function AnalyticsCharts({ distribution, selectedSite }: Props) {
+  const chartData = selectedSite
+    ? distribution
+        .map(d => ({ name: d.Compound, value: (d as any)[selectedSite] as number }))
+        .filter(d => d.value > 0)
+        .sort((a, b) => b.value - a.value)
+        .slice(0, 10)
+    : distribution
+        .map(d => ({
+          name: d.Compound,
+          value: parseFloat((LOC_COLS.reduce((s, l) => s + (d as any)[l], 0) / LOC_COLS.length).toFixed(3)),
+        }))
+        .sort((a, b) => b.value - a.value)
+        .slice(0, 10);
+
+  const colors = ['#059669', '#10b981', '#34d399', '#6ee7b7', '#a7f3d0', '#059669', '#10b981', '#34d399', '#6ee7b7', '#a7f3d0'];
 
   return (
-    <div className="h-full flex flex-col">
-      <div className="flex-1 min-h-[250px]">
+    <div className="h-full flex flex-col gap-4">
+      <p className="text-[9px] font-bold text-gray-400 uppercase tracking-widest">
+        {selectedSite ? `Top compounds — ${selectedSite}` : 'Top compounds — avg all sites'}
+      </p>
+
+      <div className="flex-1 min-h-0">
         <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={richnessData}>
-            <XAxis 
-              dataKey="site" 
-              axisLine={false} 
-              tickLine={false} 
-              tick={{ fill: '#9CA3AF', fontSize: 10, fontWeight: 700 }}
+          <BarChart data={chartData} layout="vertical" margin={{ left: 0, right: 24, top: 0, bottom: 0 }}>
+            <XAxis
+              type="number"
+              axisLine={false}
+              tickLine={false}
+              tick={{ fill: '#D1D5DB', fontSize: 9 }}
+              tickFormatter={(v) => `${v}%`}
             />
-            <YAxis 
-              axisLine={false} 
-              tickLine={false} 
-              tick={{ fill: '#D1D5DB', fontSize: 10 }}
+            <YAxis
+              type="category"
+              dataKey="name"
+              width={110}
+              axisLine={false}
+              tickLine={false}
+              tick={{ fill: '#6B7280', fontSize: 9, fontWeight: 600 }}
             />
-            <Tooltip 
+            <Tooltip
               cursor={{ fill: '#F9FAFB' }}
-              contentStyle={{ 
-                backgroundColor: '#fff', 
-                border: '1px solid #E5E7EB', 
+              formatter={(v) => [`${Number(v).toFixed(2)}%`, 'Abundance']}
+              contentStyle={{
+                backgroundColor: '#fff',
+                border: '1px solid #E5E7EB',
                 borderRadius: '8px',
-                boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)',
-                fontSize: '12px'
+                fontSize: '11px',
               }}
             />
-            <Bar dataKey="count" radius={[4, 4, 0, 0]} barSize={32}>
-              {richnessData.map((entry, index) => (
-                <Cell key={`cell-${index}`} fill={index % 2 === 0 ? '#10b981' : '#34d399'} />
+            <Bar dataKey="value" radius={[0, 4, 4, 0]} barSize={14}>
+              {chartData.map((_, i) => (
+                <Cell key={i} fill={colors[i % colors.length]} />
               ))}
             </Bar>
           </BarChart>
         </ResponsiveContainer>
-      </div>
-
-      <div className="mt-8 space-y-1 overflow-y-auto max-h-[160px] custom-scrollbar pr-2">
-        {distribution.slice(0, 50).map((d) => {
-          const presenceCount = loc_cols.filter(l => (d as any)[l] > 0).length;
-          return (
-            <div key={d.Compound} className="flex items-center justify-between py-1 px-3 bg-gray-50 rounded border border-gray-100">
-              <span className="text-[10px] font-medium text-gray-500 truncate max-w-[150px]">{d.Compound}</span>
-              <div className="flex gap-1">
-                {loc_cols.map(l => (
-                   <div key={l} className={`w-1.5 h-1.5 rounded-full ${ (d as any)[l] > 0 ? 'bg-emerald-500 shadow-[0_0_4px_rgba(16,185,129,0.2)]' : 'bg-gray-200'}`} />
-                ))}
-              </div>
-            </div>
-          );
-        })}
       </div>
     </div>
   );

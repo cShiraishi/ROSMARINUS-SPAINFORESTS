@@ -1,0 +1,1168 @@
+{
+  "locations": [
+    {
+      "ref": "L1",
+      "city": "Durón",
+      "province": "Guadalajara",
+      "lat": 40.629083333333334,
+      "lon": -2.735638888888889,
+      "altitude": "800",
+      "rainfall": "536",
+      "temp": "14.7",
+      "soil": "Alkaline"
+    },
+    {
+      "ref": "L2",
+      "city": "Peralta",
+      "province": "Navarra",
+      "lat": 42.34458333333333,
+      "lon": -1.8098055555555557,
+      "altitude": "319",
+      "rainfall": "425",
+      "temp": "13.8",
+      "soil": "Alkaline"
+    },
+    {
+      "ref": "L3",
+      "city": "Patones",
+      "province": "Madrid",
+      "lat": 40.858361111111115,
+      "lon": -3.496638888888889,
+      "altitude": "888",
+      "rainfall": "545",
+      "temp": "13.0",
+      "soil": "Alkaline"
+    },
+    {
+      "ref": "L4",
+      "city": "Valdemanco",
+      "province": "Madrid",
+      "lat": 40.86416666666667,
+      "lon": -3.661722222222222,
+      "altitude": "1065",
+      "rainfall": "688",
+      "temp": "10.9",
+      "soil": "Acid"
+    },
+    {
+      "ref": "L5",
+      "city": "Bonete",
+      "province": "Albacete",
+      "lat": 38.86386111111111,
+      "lon": -1.3162777777777779,
+      "altitude": "892",
+      "rainfall": "394",
+      "temp": "13.5",
+      "soil": "Alkaline"
+    },
+    {
+      "ref": "L6",
+      "city": "Bonete",
+      "province": "Albacete",
+      "lat": 38.846333333333334,
+      "lon": -1.3268888888888888,
+      "altitude": "892",
+      "rainfall": "394",
+      "temp": "13.5",
+      "soil": "Alkaline"
+    },
+    {
+      "ref": "L7",
+      "city": "Albuñuelas",
+      "province": "Granada",
+      "lat": 36.89647222222222,
+      "lon": -3.634888888888889,
+      "altitude": "1120",
+      "rainfall": "628",
+      "temp": "13.3",
+      "soil": "Alkaline"
+    },
+    {
+      "ref": "L8",
+      "city": "Carboneras",
+      "province": "Almería",
+      "lat": 36.98694444444445,
+      "lon": -2.012611111111111,
+      "altitude": "260",
+      "rainfall": "267",
+      "temp": "18.0",
+      "soil": "Alkaline"
+    }
+  ],
+  "smiles": [
+    {
+      "Rt (min)": 13.421,
+      "Compound": "Tricyclene",
+      "SMILES": "CC1(C2CC3C1(C3C2)C)C"
+    },
+    {
+      "Rt (min)": 13.75,
+      "Compound": "α-Thujene",
+      "SMILES": "CC1=CCC2(C1C2)C(C)C"
+    },
+    {
+      "Rt (min)": 14.133,
+      "Compound": "α-Pinene",
+      "SMILES": "CC1=CCC2CC1C2(C)C"
+    },
+    {
+      "Rt (min)": 14.834,
+      "Compound": "Camphene",
+      "SMILES": "CC1(C2CCC(C2)C1=C)C"
+    },
+    {
+      "Rt (min)": 15.111,
+      "Compound": "Thuja-2.4(10)-diene",
+      "SMILES": "CC(C)C12CC1C(=C)C=C2"
+    },
+    {
+      "Rt (min)": 16.17,
+      "Compound": "Sabinene",
+      "SMILES": "CC(C)C12CCC(=C)C1C2"
+    },
+    {
+      "Rt (min)": 16.265,
+      "Compound": "β-Pinene",
+      "SMILES": "CC1(C2CCC(=C)C1C2)C"
+    },
+    {
+      "Rt (min)": 16.516,
+      "Compound": "1-octen-3-ol",
+      "SMILES": "CCCCCC(C=C)O"
+    },
+    {
+      "Rt (min)": 16.855,
+      "Compound": "3-octanone",
+      "SMILES": "CCCCCC(=O)CC"
+    },
+    {
+      "Rt (min)": 17.119,
+      "Compound": "β-Myrcene",
+      "SMILES": "CC(=CCCC(=C)C=C)C"
+    },
+    {
+      "Rt (min)": 17.367,
+      "Compound": "3-octanol",
+      "SMILES": "CCCCCC(CC)O"
+    },
+    {
+      "Rt (min)": 17.735,
+      "Compound": "α-Phellandrene",
+      "SMILES": "CC1=CCC(C=C1)C(C)C"
+    },
+    {
+      "Rt (min)": 18.004,
+      "Compound": "δ-3-Carene",
+      "SMILES": "CC1=CCC2C(C1)C2(C)C"
+    },
+    {
+      "Rt (min)": 18.587,
+      "Compound": "α-Terpinene",
+      "SMILES": "CC1=CC=C(CC1)C(C)C"
+    },
+    {
+      "Rt (min)": 18.824,
+      "Compound": "ρ-cymene",
+      "SMILES": "CC1=CC=C(C=C1)C(C)C"
+    },
+    {
+      "Rt (min)": 19.095,
+      "Compound": "Limonene",
+      "SMILES": "CC1=CCC(CC1)C(=C)C"
+    },
+    {
+      "Rt (min)": 19.204,
+      "Compound": "1.8-Cineole",
+      "SMILES": "CC1(C2CCC(O1)(CC2)C)C"
+    },
+    {
+      "Rt (min)": 19.555,
+      "Compound": "trans-β-Ocimene",
+      "SMILES": "CC(=CC/C=C(\\\\C)/C=C)C"
+    },
+    {
+      "Rt (min)": 20.079,
+      "Compound": "cis-β-Ocimene",
+      "SMILES": "CC(=CC/C=C(/C)\\\\C=C)C"
+    },
+    {
+      "Rt (min)": 20.597,
+      "Compound": "γ-Terpinene",
+      "SMILES": "CC1=CCC(=CC1)C(C)C"
+    },
+    {
+      "Rt (min)": 21.013,
+      "Compound": "cis-Sabinene hydrate",
+      "SMILES": "CC(C)[C@]12CC[C@@]([C@H]1C2)(C)O"
+    },
+    {
+      "Rt (min)": 22.12,
+      "Compound": "p-mentha-2.4(8)-diene",
+      "SMILES": "CC1CCC(=C(C)C)C=C1"
+    },
+    {
+      "Rt (min)": 22.649,
+      "Compound": "trans-sabinene hydrate",
+      "SMILES": "CC(C)[C@@]12CC[C@@]([C@@H]1C2)(C)O"
+    },
+    {
+      "Rt (min)": 22.713,
+      "Compound": "Linalool",
+      "SMILES": "CC(=CCCC(C)(C=C)O)C"
+    },
+    {
+      "Rt (min)": 23.392,
+      "Compound": "Fenchol",
+      "SMILES": "CC1(C2CCC(C2)(C1O)C)C"
+    },
+    {
+      "Rt (min)": 23.785,
+      "Compound": "ρ-Menth-2-en-1-ol",
+      "SMILES": "CC(C)[C@@H]1CC[C@@](C=C1)(C)O"
+    },
+    {
+      "Rt (min)": 23.95,
+      "Compound": "Chrysanthenone",
+      "SMILES": "CC1=CCC2C(=O)C1C2(C)C"
+    },
+    {
+      "Rt (min)": 24.686,
+      "Compound": "trans-Pinocarveol",
+      "SMILES": "CC1([C@@H]2C[C@H]1C(=C)[C@H](C2)O)C"
+    },
+    {
+      "Rt (min)": 24.937,
+      "Compound": "Camphor",
+      "SMILES": "CC1(C2CCC1(C(=O)C2)C)C"
+    },
+    {
+      "Rt (min)": 25.132,
+      "Compound": "Camphene hydrate",
+      "SMILES": "CC1(C2CCC(C2)C1(C)O)C"
+    },
+    {
+      "Rt (min)": 25.528,
+      "Compound": "Isopulegol",
+      "SMILES": "C[C@@H]1CC[C@H]([C@@H](C1)O)C(=C)C"
+    },
+    {
+      "Rt (min)": 25.727,
+      "Compound": "trans-Pinocamphone",
+      "SMILES": "C[C@@H]1[C@@H]2C[C@@H](C2(C)C)CC1=O"
+    },
+    {
+      "Rt (min)": 25.832,
+      "Compound": "Pinocarvone",
+      "SMILES": "CC1(C2CC1C(=C)C(=O)C2)C"
+    },
+    {
+      "Rt (min)": 26.032,
+      "Compound": "Borneol",
+      "SMILES": "CC1(C2CCC1(C(C2)O)C)C"
+    },
+    {
+      "Rt (min)": 26.411,
+      "Compound": "cis-Pinocamphone",
+      "SMILES": "C[C@H]1[C@@H]2C[C@@H](C2(C)C)CC1=O"
+    },
+    {
+      "Rt (min)": 26.579,
+      "Compound": "Terpinen-4-ol",
+      "SMILES": "CC1=CCC(CC1)(C(C)C)O"
+    },
+    {
+      "Rt (min)": 26.96,
+      "Compound": "ρ-cymenol-8",
+      "SMILES": "CC1=CC=C(C=C1)C(C)(C)O"
+    },
+    {
+      "Rt (min)": 27.235,
+      "Compound": "α-Terpineol",
+      "SMILES": "CC1=CCC(CC1)C(C)(C)O"
+    },
+    {
+      "Rt (min)": 27.523,
+      "Compound": "Myrtenol",
+      "SMILES": "CC1(C2CC=C(C1C2)CO)C"
+    },
+    {
+      "Rt (min)": 28.101,
+      "Compound": "Verbenone",
+      "SMILES": "CC1=CC(=O)[C@@H]2C[C@H]1C2(C)C"
+    },
+    {
+      "Rt (min)": 29.036,
+      "Compound": "Citronellol",
+      "SMILES": "CC(CCC=C(C)C)CCO"
+    },
+    {
+      "Rt (min)": 29.559,
+      "Compound": "Pulegone",
+      "SMILES": "C[C@@H]1CCC(=C(C)C)C(=O)C1"
+    },
+    {
+      "Rt (min)": 30.264,
+      "Compound": "Piperitone",
+      "SMILES": "CC1=CC(=O)C(CC1)C(C)C"
+    },
+    {
+      "Rt (min)": 30.557,
+      "Compound": "Methyl citronellate",
+      "SMILES": "CC(CCC=C(C)C)CC(=O)OC"
+    },
+    {
+      "Rt (min)": 31.758,
+      "Compound": "Bornyl acetate",
+      "SMILES": "CC(=O)O[C@@H]1C[C@@H]2CC[C@]1(C2(C)C)C"
+    },
+    {
+      "Rt (min)": 32.495,
+      "Compound": "Carvacrol",
+      "SMILES": "CC1=C(C=C(C=C1)C(C)C)O"
+    },
+    {
+      "Rt (min)": 35.652,
+      "Compound": "Ylangene",
+      "SMILES": "CC1=CC[C@@H]2[C@@H]3[C@H]1[C@]2(CC[C@H]3C(C)C)C"
+    },
+    {
+      "Rt (min)": 35.848,
+      "Compound": "α-Copaene",
+      "SMILES": "CC1=CC[C@H]2[C@H]3C1[C@]2(CC[C@H]3C(C)C)C"
+    },
+    {
+      "Rt (min)": 37.759,
+      "Compound": "β-Caryophyllene",
+      "SMILES": "C/C/1=C\\\\CCC(=C)[C@H]2CC([C@@H]2CC1)(C)C"
+    },
+    {
+      "Rt (min)": 38.11,
+      "Compound": "β-Copaene",
+      "SMILES": "CC(C)[C@@H]1CC[C@]2([C@@H]3[C@H]1C2C(=C)CC3)C"
+    },
+    {
+      "Rt (min)": 38.722,
+      "Compound": "Guaia-6.9-diene",
+      "SMILES": "C[C@@H]1CC[C@H]2[C@@H]1C=C(CC=C2C)C(C)C"
+    },
+    {
+      "Rt (min)": 39.187,
+      "Compound": "Humulene",
+      "SMILES": "C/C/1=C\\\\CC(/C=C/C/C(=C/CC1)/C)(C)C"
+    },
+    {
+      "Rt (min)": 40.119,
+      "Compound": "γ-Muurolene",
+      "SMILES": "CC1=C[C@@H]2[C@H](CC1)C(=C)CC[C@H]2C(C)C"
+    },
+    {
+      "Rt (min)": 40.291,
+      "Compound": "α-amorphene",
+      "SMILES": "CC1=C[C@@H]2[C@H](CC1)C(=CC[C@@H]2C(C)C)C"
+    },
+    {
+      "Rt (min)": 40.545,
+      "Compound": "β-Eudesmene",
+      "SMILES": "CC(=C)[C@@H]1CC[C@]2(CCCC(=C)[C@@H]2C1)C"
+    },
+    {
+      "Rt (min)": 40.862,
+      "Compound": "Valencene",
+      "SMILES": "C[C@@H]1CCC=C2[C@]1(C[C@@H](CC2)C(=C)C)C"
+    },
+    {
+      "Rt (min)": 41.017,
+      "Compound": "β-Bisabolene",
+      "SMILES": "CC1=CC[C@H](CC1)C(=C)CCC=C(C)C"
+    },
+    {
+      "Rt (min)": 41.095,
+      "Compound": "α-Muurolene",
+      "SMILES": "CC1=C[C@@H]2[C@H](CC1)C(=CC[C@H]2C(C)C)C"
+    },
+    {
+      "Rt (min)": 41.255,
+      "Compound": "Eremophylene",
+      "SMILES": "C[C@H]1CCC=C2[C@@]1(C[C@@H](CC2)C(=C)C)C"
+    },
+    {
+      "Rt (min)": 41.376,
+      "Compound": "iso-Caryophyllene",
+      "SMILES": "C/C/1=C/CCC(=C)[C@H]2CC([C@@H]2CC1)(C)C"
+    },
+    {
+      "Rt (min)": 41.666,
+      "Compound": "γ-Cadinene",
+      "SMILES": "CC1=C[C@@H]2[C@@H](CC1)C(=C)CC[C@H]2C(C)C"
+    },
+    {
+      "Rt (min)": 42.016,
+      "Compound": "δ-Cadinene",
+      "SMILES": "CC1=C[C@H]2[C@@H](CCC(=C2CC1)C)C(C)C"
+    },
+    {
+      "Rt (min)": 42.812,
+      "Compound": "α-Calacorene",
+      "SMILES": "CC1=CC[C@H](C2=C1C=CC(=C2)C)C(C)C"
+    },
+    {
+      "Rt (min)": 44.428,
+      "Compound": "Caryophyllene oxide",
+      "SMILES": "C[C@@]12CC[C@@H]3[C@H](CC3(C)C)C(=C)CC[C@H]1O2"
+    },
+    {
+      "Rt (min)": 44.78,
+      "Compound": "Viridiflorol",
+      "SMILES": "C[C@@H]1CC[C@H]2[C@@H]1[C@H]3[C@H](C3(C)C)CC[C@]2(C)O"
+    },
+    {
+      "Rt (min)": 45.151,
+      "Compound": "Cedrol",
+      "SMILES": "C[C@@H]1CC[C@@H]2[C@]13CC[C@@]([C@H](C3)C2(C)C)(C)O"
+    },
+    {
+      "Rt (min)": 45.441,
+      "Compound": "Humulene epoxide II",
+      "SMILES": "C/C/1=C/CC(/C=C\\\\CC2(C(O2)CC1)C)(C)C"
+    }
+  ],
+  "distribution": [
+    {
+      "Compound": "Tricyclene",
+      "L1": 0.46,
+      "L2": 0.38,
+      "L3": 0.33,
+      "L4": 0.304,
+      "L5": 0.33,
+      "L6": 0.42,
+      "L7": 0.38,
+      "L8": 0.55
+    },
+    {
+      "Compound": "α-Thujene",
+      "L1": 0.14,
+      "L2": 0.08,
+      "L3": 0.149,
+      "L4": 0.145,
+      "L5": 0.046,
+      "L6": 0.046,
+      "L7": 0.11,
+      "L8": 0.04
+    },
+    {
+      "Compound": "α-Pinene",
+      "L1": 12.8,
+      "L2": 16.8,
+      "L3": 10.8,
+      "L4": 10.07,
+      "L5": 19.2,
+      "L6": 18.4,
+      "L7": 26.4,
+      "L8": 22.4
+    },
+    {
+      "Compound": "Camphene",
+      "L1": 8.38,
+      "L2": 8.9,
+      "L3": 5.3,
+      "L4": 5.2,
+      "L5": 8,
+      "L6": 9.3,
+      "L7": 8.9,
+      "L8": 11.3
+    },
+    {
+      "Compound": "Thuja-2.4(10)-diene",
+      "L1": 0.268,
+      "L2": 0.24,
+      "L3": 0.17,
+      "L4": 0.14,
+      "L5": 0.23,
+      "L6": 0.29,
+      "L7": 0.317,
+      "L8": 0.33
+    },
+    {
+      "Compound": "Sabinene",
+      "L1": 0.045,
+      "L2": 0.065,
+      "L3": 0.14,
+      "L4": 0.05,
+      "L5": 0.057,
+      "L6": 0.03,
+      "L7": 0.08,
+      "L8": 0.03
+    },
+    {
+      "Compound": "β-Pinene",
+      "L1": 2.3,
+      "L2": 2.9,
+      "L3": 1.34,
+      "L4": 1.37,
+      "L5": 2.2,
+      "L6": 2.278,
+      "L7": 2.92,
+      "L8": 1.95
+    },
+    {
+      "Compound": "1-octen-3-ol",
+      "L1": 0.4,
+      "L2": 0.4,
+      "L3": 0.41,
+      "L4": 0.27,
+      "L5": 0.23,
+      "L6": 0.272,
+      "L7": 0.149,
+      "L8": 0.29
+    },
+    {
+      "Compound": "3-octanone",
+      "L1": 1.12,
+      "L2": 0.82,
+      "L3": 2.3,
+      "L4": 0.194,
+      "L5": 2.8,
+      "L6": 2.75,
+      "L7": 2.34,
+      "L8": 0.252
+    },
+    {
+      "Compound": "β-Myrcene",
+      "L1": 5.3,
+      "L2": 6.7,
+      "L3": 18.7,
+      "L4": 26.6,
+      "L5": 3.1,
+      "L6": 3.5,
+      "L7": 4.9,
+      "L8": 3.29
+    },
+    {
+      "Compound": "3-octanol",
+      "L1": 0.34,
+      "L2": 0.11,
+      "L3": 0.22,
+      "L4": 0.01,
+      "L5": 0.29,
+      "L6": 0.294,
+      "L7": 0.086,
+      "L8": 0.028
+    },
+    {
+      "Compound": "α-Phellandrene",
+      "L1": 0.51,
+      "L2": 0.64,
+      "L3": 0.69,
+      "L4": 0.62,
+      "L5": 0.35,
+      "L6": 0.412,
+      "L7": 0.43,
+      "L8": 1.35
+    },
+    {
+      "Compound": "δ-3-Carene",
+      "L1": 0.28,
+      "L2": 0.095,
+      "L3": 0.82,
+      "L4": 0.035,
+      "L5": 0.12,
+      "L6": 0.277,
+      "L7": 0.026,
+      "L8": 2.01
+    },
+    {
+      "Compound": "α-Terpinene",
+      "L1": 0.88,
+      "L2": 0.82,
+      "L3": 0.94,
+      "L4": 0.98,
+      "L5": 0.73,
+      "L6": 0.78,
+      "L7": 0.647,
+      "L8": 1.34
+    },
+    {
+      "Compound": "ρ-cymene",
+      "L1": 2.8,
+      "L2": 1.88,
+      "L3": 3.2,
+      "L4": 3,
+      "L5": 2.2,
+      "L6": 2.28,
+      "L7": 2.5,
+      "L8": 5.02
+    },
+    {
+      "Compound": "Limonene",
+      "L1": 15,
+      "L2": 4.61,
+      "L3": 16.7,
+      "L4": 13,
+      "L5": 5,
+      "L6": 7,
+      "L7": 5.8,
+      "L8": 7
+    },
+    {
+      "Compound": "1.8-Cineole",
+      "L1": 15,
+      "L2": 19.6,
+      "L3": 7.6,
+      "L4": 9,
+      "L5": 24,
+      "L6": 18,
+      "L7": 17.7,
+      "L8": 21
+    },
+    {
+      "Compound": "trans-β-Ocimene",
+      "L1": 0.98,
+      "L2": 0.14,
+      "L3": 0.66,
+      "L4": 1.03,
+      "L5": 0.0817,
+      "L6": 0.09,
+      "L7": 0.0239,
+      "L8": 0.296
+    },
+    {
+      "Compound": "cis-β-Ocimene",
+      "L1": 0.072,
+      "L2": 0.022,
+      "L3": 0.0744,
+      "L4": 0.109,
+      "L5": 0.019,
+      "L6": 0.014,
+      "L7": 0.01,
+      "L8": 0.018
+    },
+    {
+      "Compound": "γ-Terpinene",
+      "L1": 1.38,
+      "L2": 1.31,
+      "L3": 1.13,
+      "L4": 1.51,
+      "L5": 1,
+      "L6": 1.12,
+      "L7": 0.86,
+      "L8": 0.95
+    },
+    {
+      "Compound": "cis-Sabinene hydrate",
+      "L1": 0.041,
+      "L2": 0.036,
+      "L3": 0.023,
+      "L4": 0.023,
+      "L5": 0.035,
+      "L6": 0.029,
+      "L7": 0.086,
+      "L8": 0.029
+    },
+    {
+      "Compound": "p-mentha-2.4(8)-diene",
+      "L1": 1.27,
+      "L2": 0.95,
+      "L3": 1.32,
+      "L4": 1.24,
+      "L5": 0.72,
+      "L6": 0.82,
+      "L7": 0.76,
+      "L8": 0.94
+    },
+    {
+      "Compound": "trans-sabinene hydrate",
+      "L1": 0.02,
+      "L2": 0.025,
+      "L3": 0,
+      "L4": 0,
+      "L5": 0.019,
+      "L6": 0.017,
+      "L7": 0.039,
+      "L8": 0.013
+    },
+    {
+      "Compound": "Linalool",
+      "L1": 1.3,
+      "L2": 1.21,
+      "L3": 1.31,
+      "L4": 1.47,
+      "L5": 1.2,
+      "L6": 1.09,
+      "L7": 0.79,
+      "L8": 0.57
+    },
+    {
+      "Compound": "Fenchol",
+      "L1": 0.054,
+      "L2": 0.057,
+      "L3": 0.06,
+      "L4": 0.045,
+      "L5": 0.073,
+      "L6": 0.08,
+      "L7": 0.076,
+      "L8": 0.092
+    },
+    {
+      "Compound": "ρ-Menth-2-en-1-ol",
+      "L1": 0.049,
+      "L2": 0.048,
+      "L3": 0.051,
+      "L4": 0.043,
+      "L5": 0.035,
+      "L6": 0.031,
+      "L7": 0.052,
+      "L8": 0.067
+    },
+    {
+      "Compound": "Chrysanthenone",
+      "L1": 0.352,
+      "L2": 0.232,
+      "L3": 0.136,
+      "L4": 0.19,
+      "L5": 0.25,
+      "L6": 0.186,
+      "L7": 0.402,
+      "L8": 0.22
+    },
+    {
+      "Compound": "trans-Pinocarveol",
+      "L1": 0.066,
+      "L2": 0.06,
+      "L3": 0.056,
+      "L4": 0.048,
+      "L5": 0.06,
+      "L6": 0.049,
+      "L7": 0.087,
+      "L8": 0.08
+    },
+    {
+      "Compound": "Camphor",
+      "L1": 16.8,
+      "L2": 18.8,
+      "L3": 14.7,
+      "L4": 13.3,
+      "L5": 14,
+      "L6": 14.5,
+      "L7": 7,
+      "L8": 7.08
+    },
+    {
+      "Compound": "Camphene hydrate",
+      "L1": 0.07,
+      "L2": 0.062,
+      "L3": 0.059,
+      "L4": 0.061,
+      "L5": 0.049,
+      "L6": 0.0729,
+      "L7": 0.058,
+      "L8": 0.078
+    },
+    {
+      "Compound": "Isopulegol",
+      "L1": 0.088,
+      "L2": 0.052,
+      "L3": 0.14,
+      "L4": 0.13,
+      "L5": 0.09,
+      "L6": 0.057,
+      "L7": 0.037,
+      "L8": 0.049
+    },
+    {
+      "Compound": "trans-Pinocamphone",
+      "L1": 0.09,
+      "L2": 0.058,
+      "L3": 0.087,
+      "L4": 0.0654,
+      "L5": 0.053,
+      "L6": 0.08,
+      "L7": 0.07,
+      "L8": 0.05
+    },
+    {
+      "Compound": "Pinocarvone",
+      "L1": 0.128,
+      "L2": 0.116,
+      "L3": 0.032,
+      "L4": 0.0296,
+      "L5": 0.13,
+      "L6": 0.16,
+      "L7": 0.143,
+      "L8": 0.1
+    },
+    {
+      "Compound": "Borneol",
+      "L1": 2.5,
+      "L2": 2.12,
+      "L3": 1.31,
+      "L4": 0.72,
+      "L5": 3,
+      "L6": 3.3,
+      "L7": 3.7,
+      "L8": 3.45
+    },
+    {
+      "Compound": "cis-Pinocamphone",
+      "L1": 0.281,
+      "L2": 0.15,
+      "L3": 0.194,
+      "L4": 0.18,
+      "L5": 0.14,
+      "L6": 0.1482,
+      "L7": 0.17,
+      "L8": 0.119
+    },
+    {
+      "Compound": "Terpinen-4-ol",
+      "L1": 1,
+      "L2": 0.69,
+      "L3": 0.95,
+      "L4": 0.89,
+      "L5": 0.79,
+      "L6": 0.867,
+      "L7": 0.76,
+      "L8": 0.77
+    },
+    {
+      "Compound": "ρ-cymenol-8",
+      "L1": 0.045,
+      "L2": 0.0245,
+      "L3": 0.057,
+      "L4": 0.028,
+      "L5": 0.022,
+      "L6": 0.034,
+      "L7": 0.036,
+      "L8": 0.05
+    },
+    {
+      "Compound": "α-Terpineol",
+      "L1": 1.3,
+      "L2": 1.15,
+      "L3": 0.96,
+      "L4": 0.79,
+      "L5": 1.5,
+      "L6": 1.32,
+      "L7": 1.13,
+      "L8": 1.09
+    },
+    {
+      "Compound": "Myrtenol",
+      "L1": 0.063,
+      "L2": 0.095,
+      "L3": 0.056,
+      "L4": 0.041,
+      "L5": 0.078,
+      "L6": 0.091,
+      "L7": 0.096,
+      "L8": 0.092
+    },
+    {
+      "Compound": "Verbenone",
+      "L1": 0.63,
+      "L2": 1.22,
+      "L3": 0.39,
+      "L4": 0.2825,
+      "L5": 1.01,
+      "L6": 1.11,
+      "L7": 1.25,
+      "L8": 0.702
+    },
+    {
+      "Compound": "Citronellol",
+      "L1": 0.035,
+      "L2": 0.077,
+      "L3": 0.069,
+      "L4": 0.041,
+      "L5": 0.036,
+      "L6": 0.1,
+      "L7": 0.06,
+      "L8": 0.029
+    },
+    {
+      "Compound": "Pulegone",
+      "L1": 0,
+      "L2": 0,
+      "L3": 0.085,
+      "L4": 0.068,
+      "L5": 0.033,
+      "L6": 0.016,
+      "L7": 0,
+      "L8": 0.014
+    },
+    {
+      "Compound": "Piperitone",
+      "L1": 0,
+      "L2": 0,
+      "L3": 0.027,
+      "L4": 0.021,
+      "L5": 0,
+      "L6": 0,
+      "L7": 0,
+      "L8": 0
+    },
+    {
+      "Compound": "Methyl citronellate",
+      "L1": 0,
+      "L2": 0,
+      "L3": 0.024,
+      "L4": 0,
+      "L5": 0,
+      "L6": 0,
+      "L7": 0,
+      "L8": 0
+    },
+    {
+      "Compound": "Bornyl acetate",
+      "L1": 0.85,
+      "L2": 0.33,
+      "L3": 0.65,
+      "L4": 0.56,
+      "L5": 0.44,
+      "L6": 0.583,
+      "L7": 1.12,
+      "L8": 0.33
+    },
+    {
+      "Compound": "Carvacrol",
+      "L1": 0,
+      "L2": 0,
+      "L3": 0,
+      "L4": 0,
+      "L5": 0,
+      "L6": 0,
+      "L7": 0,
+      "L8": 0.012
+    },
+    {
+      "Compound": "Ylangene",
+      "L1": 0.076,
+      "L2": 0.275,
+      "L3": 0.153,
+      "L4": 0.07,
+      "L5": 0.34,
+      "L6": 0.3556,
+      "L7": 0.117,
+      "L8": 0.188
+    },
+    {
+      "Compound": "α-Copaene",
+      "L1": 0.078,
+      "L2": 0.083,
+      "L3": 0.158,
+      "L4": 0.226,
+      "L5": 0.101,
+      "L6": 0.082,
+      "L7": 0.26,
+      "L8": 0.037
+    },
+    {
+      "Compound": "β-Caryophyllene",
+      "L1": 3.04,
+      "L2": 2.85,
+      "L3": 1.9,
+      "L4": 2.15,
+      "L5": 3.2,
+      "L6": 2.77,
+      "L7": 2.31,
+      "L8": 2.124
+    },
+    {
+      "Compound": "β-Copaene",
+      "L1": 0,
+      "L2": 0,
+      "L3": 0.113,
+      "L4": 0.031,
+      "L5": 0,
+      "L6": 0.019,
+      "L7": 0.034,
+      "L8": 0.014
+    },
+    {
+      "Compound": "Guaia-6.9-diene",
+      "L1": 0.009,
+      "L2": 0.06,
+      "L3": 0.027,
+      "L4": 0.006,
+      "L5": 0.074,
+      "L6": 0.075,
+      "L7": 0.013,
+      "L8": 0.04
+    },
+    {
+      "Compound": "Humulene",
+      "L1": 0.52,
+      "L2": 1.16,
+      "L3": 0.6,
+      "L4": 1.06,
+      "L5": 1.27,
+      "L6": 1.55,
+      "L7": 2.15,
+      "L8": 0.97
+    },
+    {
+      "Compound": "γ-Muurolene",
+      "L1": 0.085,
+      "L2": 0.101,
+      "L3": 0.192,
+      "L4": 0.28,
+      "L5": 0.15,
+      "L6": 0.12,
+      "L7": 0.31,
+      "L8": 0.054
+    },
+    {
+      "Compound": "α-amorphene",
+      "L1": 0.054,
+      "L2": 0.162,
+      "L3": 0.105,
+      "L4": 0.079,
+      "L5": 0.19,
+      "L6": 0.198,
+      "L7": 0.09,
+      "L8": 0.16
+    },
+    {
+      "Compound": "β-Eudesmene",
+      "L1": 0.021,
+      "L2": 0.029,
+      "L3": 0.032,
+      "L4": 0.044,
+      "L5": 0.03,
+      "L6": 0.033,
+      "L7": 0.03,
+      "L8": 0.0187
+    },
+    {
+      "Compound": "Valencene",
+      "L1": 0.05,
+      "L2": 0.098,
+      "L3": 0.173,
+      "L4": 0.11,
+      "L5": 0.132,
+      "L6": 0.125,
+      "L7": 0.139,
+      "L8": 0.065
+    },
+    {
+      "Compound": "β-Bisabolene",
+      "L1": 0.006,
+      "L2": 0.025,
+      "L3": 0,
+      "L4": 0,
+      "L5": 0.073,
+      "L6": 0.06,
+      "L7": 0.06,
+      "L8": 0.03
+    },
+    {
+      "Compound": "α-Muurolene",
+      "L1": 0,
+      "L2": 0.022,
+      "L3": 0.042,
+      "L4": 0.063,
+      "L5": 0.055,
+      "L6": 0.043,
+      "L7": 0.087,
+      "L8": 0
+    },
+    {
+      "Compound": "Eremophylene",
+      "L1": 0.03,
+      "L2": 0.0265,
+      "L3": 0.27,
+      "L4": 0,
+      "L5": 0,
+      "L6": 0,
+      "L7": 0,
+      "L8": 0
+    },
+    {
+      "Compound": "iso-Caryophyllene",
+      "L1": 0.05,
+      "L2": 0.11,
+      "L3": 0.087,
+      "L4": 0.09,
+      "L5": 0.17,
+      "L6": 0.19,
+      "L7": 0.12,
+      "L8": 0.15
+    },
+    {
+      "Compound": "γ-Cadinene",
+      "L1": 0.049,
+      "L2": 0.059,
+      "L3": 0.252,
+      "L4": 0.136,
+      "L5": 0.07,
+      "L6": 0.062,
+      "L7": 0.17,
+      "L8": 0.0265
+    },
+    {
+      "Compound": "δ-Cadinene",
+      "L1": 0.13,
+      "L2": 0.19,
+      "L3": 0.335,
+      "L4": 0.432,
+      "L5": 0.26,
+      "L6": 0.235,
+      "L7": 0.57,
+      "L8": 0.12
+    },
+    {
+      "Compound": "α-Calacorene",
+      "L1": 0.022,
+      "L2": 0.102,
+      "L3": 0.079,
+      "L4": 0.027,
+      "L5": 0.161,
+      "L6": 0.185,
+      "L7": 0.063,
+      "L8": 0.059
+    },
+    {
+      "Compound": "Caryophyllene oxide",
+      "L1": 0.12,
+      "L2": 0.156,
+      "L3": 0.211,
+      "L4": 0.17,
+      "L5": 0.159,
+      "L6": 0.13,
+      "L7": 0.26,
+      "L8": 0.14
+    },
+    {
+      "Compound": "Viridiflorol",
+      "L1": 0.006,
+      "L2": 0.04,
+      "L3": 0.012,
+      "L4": 0.0128,
+      "L5": 0,
+      "L6": 0,
+      "L7": 0,
+      "L8": 0
+    },
+    {
+      "Compound": "Cedrol",
+      "L1": 0,
+      "L2": 0,
+      "L3": 0,
+      "L4": 0,
+      "L5": 0,
+      "L6": 0,
+      "L7": 0,
+      "L8": 0.187
+    },
+    {
+      "Compound": "Humulene epoxide II",
+      "L1": 0.053,
+      "L2": 0.08,
+      "L3": 0.161,
+      "L4": 0.13,
+      "L5": 0.0673,
+      "L6": 0.109,
+      "L7": 0.178,
+      "L8": 0.063
+    }
+  ]
+}

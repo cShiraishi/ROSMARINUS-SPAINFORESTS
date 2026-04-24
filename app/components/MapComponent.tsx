@@ -54,9 +54,15 @@ export default function MapComponent({ locations, onSiteClick }: { locations: an
             }}
           >
             <Popup>
-              <div className="p-1">
-                <p className="font-bold text-emerald-600 leading-none mb-1">{loc.ref}</p>
-                <p className="text-xs text-gray-500">{loc.city}</p>
+              <div className="p-1 space-y-1 min-w-[140px]">
+                <p className="font-bold text-emerald-600 text-sm leading-none">{loc.ref} — {loc.city}</p>
+                <p className="text-xs text-gray-400">{loc.province}</p>
+                <div className="pt-1 grid grid-cols-2 gap-x-3 gap-y-0.5 text-xs text-gray-600">
+                  <span>⛰ {loc.altitude} m</span>
+                  <span>🌡 {loc.temp}°C</span>
+                  <span>🌧 {loc.rainfall} mm</span>
+                  <span>🪨 {loc.soil}</span>
+                </div>
               </div>
             </Popup>
           </Marker>

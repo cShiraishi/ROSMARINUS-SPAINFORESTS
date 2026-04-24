@@ -36,3 +36,4 @@ next-env.d.ts
 old_streamlit/
 data_source/
 data.json
+!public/data.json
