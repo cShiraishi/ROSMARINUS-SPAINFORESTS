@@ -93,337 +93,404 @@
     {
       "Rt (min)": 13.421,
       "Compound": "Tricyclene",
-      "SMILES": "CC1(C2CC3C1(C3C2)C)C"
+      "SMILES": "CC1(C2CC3C1(C3C2)C)C",
+      "class": "Monoterpene HC"
     },
     {
       "Rt (min)": 13.75,
       "Compound": "α-Thujene",
-      "SMILES": "CC1=CCC2(C1C2)C(C)C"
+      "SMILES": "CC1=CCC2(C1C2)C(C)C",
+      "class": "Monoterpene HC"
     },
     {
       "Rt (min)": 14.133,
       "Compound": "α-Pinene",
-      "SMILES": "CC1=CCC2CC1C2(C)C"
+      "SMILES": "CC1=CCC2CC1C2(C)C",
+      "class": "Monoterpene HC"
     },
     {
       "Rt (min)": 14.834,
       "Compound": "Camphene",
-      "SMILES": "CC1(C2CCC(C2)C1=C)C"
+      "SMILES": "CC1(C2CCC(C2)C1=C)C",
+      "class": "Monoterpene HC"
     },
     {
       "Rt (min)": 15.111,
       "Compound": "Thuja-2.4(10)-diene",
-      "SMILES": "CC(C)C12CC1C(=C)C=C2"
+      "SMILES": "CC(C)C12CC1C(=C)C=C2",
+      "class": "Monoterpene HC"
     },
     {
       "Rt (min)": 16.17,
       "Compound": "Sabinene",
-      "SMILES": "CC(C)C12CCC(=C)C1C2"
+      "SMILES": "CC(C)C12CCC(=C)C1C2",
+      "class": "Monoterpene HC"
     },
     {
       "Rt (min)": 16.265,
       "Compound": "β-Pinene",
-      "SMILES": "CC1(C2CCC(=C)C1C2)C"
+      "SMILES": "CC1(C2CCC(=C)C1C2)C",
+      "class": "Monoterpene HC"
     },
     {
       "Rt (min)": 16.516,
       "Compound": "1-octen-3-ol",
-      "SMILES": "CCCCCC(C=C)O"
+      "SMILES": "CCCCCC(C=C)O",
+      "class": "C8"
     },
     {
       "Rt (min)": 16.855,
       "Compound": "3-octanone",
-      "SMILES": "CCCCCC(=O)CC"
+      "SMILES": "CCCCCC(=O)CC",
+      "class": "C8"
     },
     {
       "Rt (min)": 17.119,
       "Compound": "β-Myrcene",
-      "SMILES": "CC(=CCCC(=C)C=C)C"
+      "SMILES": "CC(=CCCC(=C)C=C)C",
+      "class": "Monoterpene HC"
     },
     {
       "Rt (min)": 17.367,
       "Compound": "3-octanol",
-      "SMILES": "CCCCCC(CC)O"
+      "SMILES": "CCCCCC(CC)O",
+      "class": "C8"
     },
     {
       "Rt (min)": 17.735,
       "Compound": "α-Phellandrene",
-      "SMILES": "CC1=CCC(C=C1)C(C)C"
+      "SMILES": "CC1=CCC(C=C1)C(C)C",
+      "class": "Monoterpene HC"
     },
     {
       "Rt (min)": 18.004,
       "Compound": "δ-3-Carene",
-      "SMILES": "CC1=CCC2C(C1)C2(C)C"
+      "SMILES": "CC1=CCC2C(C1)C2(C)C",
+      "class": "Monoterpene HC"
     },
     {
       "Rt (min)": 18.587,
       "Compound": "α-Terpinene",
-      "SMILES": "CC1=CC=C(CC1)C(C)C"
+      "SMILES": "CC1=CC=C(CC1)C(C)C",
+      "class": "Monoterpene HC"
     },
     {
       "Rt (min)": 18.824,
       "Compound": "ρ-cymene",
-      "SMILES": "CC1=CC=C(C=C1)C(C)C"
+      "SMILES": "CC1=CC=C(C=C1)C(C)C",
+      "class": "Monoterpene HC"
     },
     {
       "Rt (min)": 19.095,
       "Compound": "Limonene",
-      "SMILES": "CC1=CCC(CC1)C(=C)C"
+      "SMILES": "CC1=CCC(CC1)C(=C)C",
+      "class": "Monoterpene HC"
     },
     {
       "Rt (min)": 19.204,
       "Compound": "1.8-Cineole",
-      "SMILES": "CC1(C2CCC(O1)(CC2)C)C"
+      "SMILES": "CC1(C2CCC(O1)(CC2)C)C",
+      "class": "Oxygenated MT"
     },
     {
       "Rt (min)": 19.555,
       "Compound": "trans-β-Ocimene",
-      "SMILES": "CC(=CC/C=C(\\\\C)/C=C)C"
+      "SMILES": "CC(=CC/C=C(\\\\C)/C=C)C",
+      "class": "Monoterpene HC"
     },
     {
       "Rt (min)": 20.079,
       "Compound": "cis-β-Ocimene",
-      "SMILES": "CC(=CC/C=C(/C)\\\\C=C)C"
+      "SMILES": "CC(=CC/C=C(/C)\\\\C=C)C",
+      "class": "Monoterpene HC"
     },
     {
       "Rt (min)": 20.597,
       "Compound": "γ-Terpinene",
-      "SMILES": "CC1=CCC(=CC1)C(C)C"
+      "SMILES": "CC1=CCC(=CC1)C(C)C",
+      "class": "Monoterpene HC"
     },
     {
       "Rt (min)": 21.013,
       "Compound": "cis-Sabinene hydrate",
-      "SMILES": "CC(C)[C@]12CC[C@@]([C@H]1C2)(C)O"
+      "SMILES": "CC(C)[C@]12CC[C@@]([C@H]1C2)(C)O",
+      "class": "Oxygenated MT"
     },
     {
       "Rt (min)": 22.12,
       "Compound": "p-mentha-2.4(8)-diene",
-      "SMILES": "CC1CCC(=C(C)C)C=C1"
+      "SMILES": "CC1CCC(=C(C)C)C=C1",
+      "class": "Monoterpene HC"
     },
     {
       "Rt (min)": 22.649,
       "Compound": "trans-sabinene hydrate",
-      "SMILES": "CC(C)[C@@]12CC[C@@]([C@@H]1C2)(C)O"
+      "SMILES": "CC(C)[C@@]12CC[C@@]([C@@H]1C2)(C)O",
+      "class": "Oxygenated MT"
     },
     {
       "Rt (min)": 22.713,
       "Compound": "Linalool",
-      "SMILES": "CC(=CCCC(C)(C=C)O)C"
+      "SMILES": "CC(=CCCC(C)(C=C)O)C",
+      "class": "Oxygenated MT"
     },
     {
       "Rt (min)": 23.392,
       "Compound": "Fenchol",
-      "SMILES": "CC1(C2CCC(C2)(C1O)C)C"
+      "SMILES": "CC1(C2CCC(C2)(C1O)C)C",
+      "class": "Oxygenated MT"
     },
     {
       "Rt (min)": 23.785,
       "Compound": "ρ-Menth-2-en-1-ol",
-      "SMILES": "CC(C)[C@@H]1CC[C@@](C=C1)(C)O"
+      "SMILES": "CC(C)[C@@H]1CC[C@@](C=C1)(C)O",
+      "class": "Oxygenated MT"
     },
     {
       "Rt (min)": 23.95,
       "Compound": "Chrysanthenone",
-      "SMILES": "CC1=CCC2C(=O)C1C2(C)C"
+      "SMILES": "CC1=CCC2C(=O)C1C2(C)C",
+      "class": "Oxygenated MT"
     },
     {
       "Rt (min)": 24.686,
       "Compound": "trans-Pinocarveol",
-      "SMILES": "CC1([C@@H]2C[C@H]1C(=C)[C@H](C2)O)C"
+      "SMILES": "CC1([C@@H]2C[C@H]1C(=C)[C@H](C2)O)C",
+      "class": "Oxygenated MT"
     },
     {
       "Rt (min)": 24.937,
       "Compound": "Camphor",
-      "SMILES": "CC1(C2CCC1(C(=O)C2)C)C"
+      "SMILES": "CC1(C2CCC1(C(=O)C2)C)C",
+      "class": "Oxygenated MT"
     },
     {
       "Rt (min)": 25.132,
       "Compound": "Camphene hydrate",
-      "SMILES": "CC1(C2CCC(C2)C1(C)O)C"
+      "SMILES": "CC1(C2CCC(C2)C1(C)O)C",
+      "class": "Oxygenated MT"
     },
     {
       "Rt (min)": 25.528,
       "Compound": "Isopulegol",
-      "SMILES": "C[C@@H]1CC[C@H]([C@@H](C1)O)C(=C)C"
+      "SMILES": "C[C@@H]1CC[C@H]([C@@H](C1)O)C(=C)C",
+      "class": "Oxygenated MT"
     },
     {
       "Rt (min)": 25.727,
       "Compound": "trans-Pinocamphone",
-      "SMILES": "C[C@@H]1[C@@H]2C[C@@H](C2(C)C)CC1=O"
+      "SMILES": "C[C@@H]1[C@@H]2C[C@@H](C2(C)C)CC1=O",
+      "class": "Oxygenated MT"
     },
     {
       "Rt (min)": 25.832,
       "Compound": "Pinocarvone",
-      "SMILES": "CC1(C2CC1C(=C)C(=O)C2)C"
+      "SMILES": "CC1(C2CC1C(=C)C(=O)C2)C",
+      "class": "Oxygenated MT"
     },
     {
       "Rt (min)": 26.032,
       "Compound": "Borneol",
-      "SMILES": "CC1(C2CCC1(C(C2)O)C)C"
+      "SMILES": "CC1(C2CCC1(C(C2)O)C)C",
+      "class": "Oxygenated MT"
     },
     {
       "Rt (min)": 26.411,
       "Compound": "cis-Pinocamphone",
-      "SMILES": "C[C@H]1[C@@H]2C[C@@H](C2(C)C)CC1=O"
+      "SMILES": "C[C@H]1[C@@H]2C[C@@H](C2(C)C)CC1=O",
+      "class": "Oxygenated MT"
     },
     {
       "Rt (min)": 26.579,
       "Compound": "Terpinen-4-ol",
-      "SMILES": "CC1=CCC(CC1)(C(C)C)O"
+      "SMILES": "CC1=CCC(CC1)(C(C)C)O",
+      "class": "Oxygenated MT"
     },
     {
       "Rt (min)": 26.96,
       "Compound": "ρ-cymenol-8",
-      "SMILES": "CC1=CC=C(C=C1)C(C)(C)O"
+      "SMILES": "CC1=CC=C(C=C1)C(C)(C)O",
+      "class": "Oxygenated MT"
     },
     {
       "Rt (min)": 27.235,
       "Compound": "α-Terpineol",
-      "SMILES": "CC1=CCC(CC1)C(C)(C)O"
+      "SMILES": "CC1=CCC(CC1)C(C)(C)O",
+      "class": "Oxygenated MT"
     },
     {
       "Rt (min)": 27.523,
       "Compound": "Myrtenol",
-      "SMILES": "CC1(C2CC=C(C1C2)CO)C"
+      "SMILES": "CC1(C2CC=C(C1C2)CO)C",
+      "class": "Oxygenated MT"
     },
     {
       "Rt (min)": 28.101,
       "Compound": "Verbenone",
-      "SMILES": "CC1=CC(=O)[C@@H]2C[C@H]1C2(C)C"
+      "SMILES": "CC1=CC(=O)[C@@H]2C[C@H]1C2(C)C",
+      "class": "Oxygenated MT"
     },
     {
       "Rt (min)": 29.036,
       "Compound": "Citronellol",
-      "SMILES": "CC(CCC=C(C)C)CCO"
+      "SMILES": "CC(CCC=C(C)C)CCO",
+      "class": "Oxygenated MT"
     },
     {
       "Rt (min)": 29.559,
       "Compound": "Pulegone",
-      "SMILES": "C[C@@H]1CCC(=C(C)C)C(=O)C1"
+      "SMILES": "C[C@@H]1CCC(=C(C)C)C(=O)C1",
+      "class": "Oxygenated MT"
     },
     {
       "Rt (min)": 30.264,
       "Compound": "Piperitone",
-      "SMILES": "CC1=CC(=O)C(CC1)C(C)C"
+      "SMILES": "CC1=CC(=O)C(CC1)C(C)C",
+      "class": "Oxygenated MT"
     },
     {
       "Rt (min)": 30.557,
       "Compound": "Methyl citronellate",
-      "SMILES": "CC(CCC=C(C)C)CC(=O)OC"
+      "SMILES": "CC(CCC=C(C)C)CC(=O)OC",
+      "class": "Oxygenated MT"
     },
     {
       "Rt (min)": 31.758,
       "Compound": "Bornyl acetate",
-      "SMILES": "CC(=O)O[C@@H]1C[C@@H]2CC[C@]1(C2(C)C)C"
+      "SMILES": "CC(=O)O[C@@H]1C[C@@H]2CC[C@]1(C2(C)C)C",
+      "class": "Oxygenated MT"
     },
     {
       "Rt (min)": 32.495,
       "Compound": "Carvacrol",
-      "SMILES": "CC1=C(C=C(C=C1)C(C)C)O"
+      "SMILES": "CC1=C(C=C(C=C1)C(C)C)O",
+      "class": "Oxygenated MT"
     },
     {
       "Rt (min)": 35.652,
       "Compound": "Ylangene",
-      "SMILES": "CC1=CC[C@@H]2[C@@H]3[C@H]1[C@]2(CC[C@H]3C(C)C)C"
+      "SMILES": "CC1=CC[C@@H]2[C@@H]3[C@H]1[C@]2(CC[C@H]3C(C)C)C",
+      "class": "Sesquiterpene HC"
     },
     {
       "Rt (min)": 35.848,
       "Compound": "α-Copaene",
-      "SMILES": "CC1=CC[C@H]2[C@H]3C1[C@]2(CC[C@H]3C(C)C)C"
+      "SMILES": "CC1=CC[C@H]2[C@H]3C1[C@]2(CC[C@H]3C(C)C)C",
+      "class": "Sesquiterpene HC"
     },
     {
       "Rt (min)": 37.759,
       "Compound": "β-Caryophyllene",
-      "SMILES": "C/C/1=C\\\\CCC(=C)[C@H]2CC([C@@H]2CC1)(C)C"
+      "SMILES": "C/C/1=C\\\\CCC(=C)[C@H]2CC([C@@H]2CC1)(C)C",
+      "class": "Sesquiterpene HC"
     },
     {
       "Rt (min)": 38.11,
       "Compound": "β-Copaene",
-      "SMILES": "CC(C)[C@@H]1CC[C@]2([C@@H]3[C@H]1C2C(=C)CC3)C"
+      "SMILES": "CC(C)[C@@H]1CC[C@]2([C@@H]3[C@H]1C2C(=C)CC3)C",
+      "class": "Sesquiterpene HC"
     },
     {
       "Rt (min)": 38.722,
       "Compound": "Guaia-6.9-diene",
-      "SMILES": "C[C@@H]1CC[C@H]2[C@@H]1C=C(CC=C2C)C(C)C"
+      "SMILES": "C[C@@H]1CC[C@H]2[C@@H]1C=C(CC=C2C)C(C)C",
+      "class": "Sesquiterpene HC"
     },
     {
       "Rt (min)": 39.187,
       "Compound": "Humulene",
-      "SMILES": "C/C/1=C\\\\CC(/C=C/C/C(=C/CC1)/C)(C)C"
+      "SMILES": "C/C/1=C\\\\CC(/C=C/C/C(=C/CC1)/C)(C)C",
+      "class": "Sesquiterpene HC"
     },
     {
       "Rt (min)": 40.119,
       "Compound": "γ-Muurolene",
-      "SMILES": "CC1=C[C@@H]2[C@H](CC1)C(=C)CC[C@H]2C(C)C"
+      "SMILES": "CC1=C[C@@H]2[C@H](CC1)C(=C)CC[C@H]2C(C)C",
+      "class": "Sesquiterpene HC"
     },
     {
       "Rt (min)": 40.291,
       "Compound": "α-amorphene",
-      "SMILES": "CC1=C[C@@H]2[C@H](CC1)C(=CC[C@@H]2C(C)C)C"
+      "SMILES": "CC1=C[C@@H]2[C@H](CC1)C(=CC[C@@H]2C(C)C)C",
+      "class": "Sesquiterpene HC"
     },
     {
       "Rt (min)": 40.545,
       "Compound": "β-Eudesmene",
-      "SMILES": "CC(=C)[C@@H]1CC[C@]2(CCCC(=C)[C@@H]2C1)C"
+      "SMILES": "CC(=C)[C@@H]1CC[C@]2(CCCC(=C)[C@@H]2C1)C",
+      "class": "Sesquiterpene HC"
     },
     {
       "Rt (min)": 40.862,
       "Compound": "Valencene",
-      "SMILES": "C[C@@H]1CCC=C2[C@]1(C[C@@H](CC2)C(=C)C)C"
+      "SMILES": "C[C@@H]1CCC=C2[C@]1(C[C@@H](CC2)C(=C)C)C",
+      "class": "Sesquiterpene HC"
     },
     {
       "Rt (min)": 41.017,
       "Compound": "β-Bisabolene",
-      "SMILES": "CC1=CC[C@H](CC1)C(=C)CCC=C(C)C"
+      "SMILES": "CC1=CC[C@H](CC1)C(=C)CCC=C(C)C",
+      "class": "Sesquiterpene HC"
     },
     {
       "Rt (min)": 41.095,
       "Compound": "α-Muurolene",
-      "SMILES": "CC1=C[C@@H]2[C@H](CC1)C(=CC[C@H]2C(C)C)C"
+      "SMILES": "CC1=C[C@@H]2[C@H](CC1)C(=CC[C@H]2C(C)C)C",
+      "class": "Sesquiterpene HC"
     },
     {
       "Rt (min)": 41.255,
       "Compound": "Eremophylene",
-      "SMILES": "C[C@H]1CCC=C2[C@@]1(C[C@@H](CC2)C(=C)C)C"
+      "SMILES": "C[C@H]1CCC=C2[C@@]1(C[C@@H](CC2)C(=C)C)C",
+      "class": "Sesquiterpene HC"
     },
     {
       "Rt (min)": 41.376,
       "Compound": "iso-Caryophyllene",
-      "SMILES": "C/C/1=C/CCC(=C)[C@H]2CC([C@@H]2CC1)(C)C"
+      "SMILES": "C/C/1=C/CCC(=C)[C@H]2CC([C@@H]2CC1)(C)C",
+      "class": "Sesquiterpene HC"
     },
     {
       "Rt (min)": 41.666,
       "Compound": "γ-Cadinene",
-      "SMILES": "CC1=C[C@@H]2[C@@H](CC1)C(=C)CC[C@H]2C(C)C"
+      "SMILES": "CC1=C[C@@H]2[C@@H](CC1)C(=C)CC[C@H]2C(C)C",
+      "class": "Sesquiterpene HC"
     },
     {
       "Rt (min)": 42.016,
       "Compound": "δ-Cadinene",
-      "SMILES": "CC1=C[C@H]2[C@@H](CCC(=C2CC1)C)C(C)C"
+      "SMILES": "CC1=C[C@H]2[C@@H](CCC(=C2CC1)C)C(C)C",
+      "class": "Sesquiterpene HC"
     },
     {
       "Rt (min)": 42.812,
       "Compound": "α-Calacorene",
-      "SMILES": "CC1=CC[C@H](C2=C1C=CC(=C2)C)C(C)C"
+      "SMILES": "CC1=CC[C@H](C2=C1C=CC(=C2)C)C(C)C",
+      "class": "Sesquiterpene HC"
     },
     {
       "Rt (min)": 44.428,
       "Compound": "Caryophyllene oxide",
-      "SMILES": "C[C@@]12CC[C@@H]3[C@H](CC3(C)C)C(=C)CC[C@H]1O2"
+      "SMILES": "C[C@@]12CC[C@@H]3[C@H](CC3(C)C)C(=C)CC[C@H]1O2",
+      "class": "Oxygenated ST"
     },
     {
       "Rt (min)": 44.78,
       "Compound": "Viridiflorol",
-      "SMILES": "C[C@@H]1CC[C@H]2[C@@H]1[C@H]3[C@H](C3(C)C)CC[C@]2(C)O"
+      "SMILES": "C[C@@H]1CC[C@H]2[C@@H]1[C@H]3[C@H](C3(C)C)CC[C@]2(C)O",
+      "class": "Oxygenated ST"
     },
     {
       "Rt (min)": 45.151,
       "Compound": "Cedrol",
-      "SMILES": "C[C@@H]1CC[C@@H]2[C@]13CC[C@@]([C@H](C3)C2(C)C)(C)O"
+      "SMILES": "C[C@@H]1CC[C@@H]2[C@]13CC[C@@]([C@H](C3)C2(C)C)(C)O",
+      "class": "Oxygenated ST"
     },
     {
       "Rt (min)": 45.441,
       "Compound": "Humulene epoxide II",
-      "SMILES": "C/C/1=C/CC(/C=C\\\\CC2(C(O2)CC1)C)(C)C"
+      "SMILES": "C/C/1=C/CC(/C=C\\\\CC2(C(O2)CC1)C)(C)C",
+      "class": "Oxygenated ST"
     }
   ],
   "distribution": [
